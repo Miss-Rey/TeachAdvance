@@ -6,13 +6,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     flowbite.content()
   ],
-  plugins: [
-    flowbite.plugin(),
-    
-  ],
   theme: {
     extend: {},
   },
+  plugins: [
+    flowbite.plugin(),
+  ],
   plugins: [require('daisyui')],
 }
 

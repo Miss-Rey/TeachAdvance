@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from '../components/Carousel'
-import Navbar from '../components/Navbar'
+import TopNav from '../components/Navbar'
 import Recommendation from '../components/Recommendation'
 import Certs from '../components/Certs'
 import CustomerReview from '../components/Review'
@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <>
             <div>
-                <Navbar />
+                <TopNav />
                 <Slider />
             </div>
             <div className='my-10'>

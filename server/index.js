@@ -8,6 +8,9 @@ const PORT = process.env.PORT
 const registration = require('../server/Routes/user.route')
 const login = require('../server/Routes/login.route')
 const cookieParser = require('cookie-parser')
+const enroll = require('./Routes/enrollment.route')
+const enrolled = require('./Routes/enrolled')
+
 
 
 const app = express();
@@ -30,6 +33,8 @@ app.get('/', (req,res) =>{
 
 app.use('/api/register', registration);
 app.use('/api/login', login)
+app.use('/api/enroll', enroll)
+app.use('/api/enrolled', enrolled)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
