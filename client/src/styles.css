@@ -2,3 +2,7 @@ ul, ol {
     list-style: initial;
     margin-left: 20px;
 }
+
+.class{
+    background-color: aqua;
+}

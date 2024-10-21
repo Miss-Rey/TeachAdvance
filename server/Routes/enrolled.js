@@ -12,11 +12,11 @@ router.get('/', async (req, res) => {
         }))
 
         if (!enrollments.length) {
-            return res.json({ success: true, courses: [] }); // No enrollments found
+            return res.json({ success: true, courses: [], isEnrolled: false  }); // No enrollments found
         }
 
         const courseIds = enrollments.map(enrollment => enrollment.courseId)
-        res.json({ success: true, courseIds })
+        res.json({ success: true, courseIds, isEnrolled: true })
     } catch (error) {
         console.error('Error fetching enrolled course:', error)
         res.status(500).json({ success: false, message: 'Error fetching enrolled courses' })

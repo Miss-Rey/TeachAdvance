@@ -60,7 +60,7 @@ const TopNav = () => {
 
         <Navbar fluid rounded className='border-b-2 list-none'>
             <Navbar.Brand href="#">
-                <span className="self-center whitespace-nowrap text-sm lg:text-xl xl:text-xl md:text-xl text-black font-semibold ">Savor Restaurant</span>
+                <span className="self-center whitespace-nowrap text-sm lg:text-xl xl:text-xl md:text-xl text-black font-semibold "><Link to={'/'}>TeachAdvance</Link></span>
             </Navbar.Brand>
             <div className="flex md:order-2 gap-1 justify-bottom items-bottom">
 

@@ -10,7 +10,8 @@ const login = require('../server/Routes/login.route')
 const cookieParser = require('cookie-parser')
 const enroll = require('./Routes/enrollment.route')
 const enrolled = require('./Routes/enrolled')
-
+const profile = require('./Routes/profile.route')
+const editProfile = require('./Routes/editDetails.route')
 
 
 const app = express();
@@ -35,6 +36,8 @@ app.use('/api/register', registration);
 app.use('/api/login', login)
 app.use('/api/enroll', enroll)
 app.use('/api/enrolled', enrolled)
+app.use('/api/profile', profile)
+app.use('/api/profile', editProfile)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {

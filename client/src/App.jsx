@@ -6,6 +6,7 @@ import CourseDetails from "./pages/CourseDetails"
 import Courses from "./pages/Courses"
 import Notes from "./pages/Notes"
 import MyCourses from "./pages/MyCourses"
+import profile from './pages/Profile'
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
         <Route path="/" Component={Home}/>
         <Route path="/login" Component={Login}/>
         <Route path="/register" Component={Register} />
-        <Route path="/courses/:id" element={<CourseDetails />} />
+        {/* <Route path="/courses/:id" element={<CourseDetails />} /> */}
+        <Route path="/courses/:id" Component={CourseDetails} />
         <Route path="/courses" Component={Courses} />
         <Route path="/courses/:id/notes" Component={Notes} />
         <Route path="/mycourses" Component={MyCourses} />
+        <Route path="/profile" Component={profile} />
       </Routes>
     </>
   )

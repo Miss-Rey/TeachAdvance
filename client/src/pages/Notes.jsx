@@ -1,45 +1,35 @@
-import { React, useState, useEffect } from 'react'
-// import { Sidebar } from "flowbite-react";
+import { React, useState, useEffect } from 'react';
 import {
-    HiArrowSmRight,
-    HiClipboard,
-    HiChartPie,
-    HiInbox,
     HiOutlineMinusSm,
     HiOutlinePlusSm,
     HiShoppingBag,
-    HiTable,
-    HiUser,
     HiMenuAlt2
 } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 import { useParams } from 'react-router-dom';
-import { Button, Drawer, Sidebar, TextInput } from "flowbite-react";
+import { Button, Drawer, Sidebar } from "flowbite-react";
 import TopNav from '../components/Navbar';
 
-
-
-
 const Notes = () => {
-
-    const { id } = useParams()
-    const [course, setCourse] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const endpount = import.meta.env.VITE_KEYSTONE;
-
+    const { id } = useParams();
+    const [course, setCourse] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [isOpen, setIsOpen] = useState(true);
+    const [selectedSubmodule, setSelectedSubmodule] = useState(null); // Track selected submodule
+
+    const endpount = import.meta.env.VITE_KEYSTONE;
 
     const handleClose = () => setIsOpen(false);
 
     useEffect(() => {
-        fetchCourse(id)
-    }, [id])
+        fetchCourse(id);
+    }, [id]);
 
-    const fetchCourse = async (couseId) => {
+    const fetchCourse = async (courseId) => {
         const query = `
             query {
-                courses(where: {id: { equals: "${couseId}"}}) {
+                courses(where: {id: { equals: "${courseId}"}}) {
                     id
                     title
                     chapter {
@@ -48,7 +38,7 @@ const Notes = () => {
                         submodules {
                             id 
                             title
-                            notes{
+                            notes {
                                 id
                                 content {
                                     document
@@ -58,7 +48,7 @@ const Notes = () => {
                     }
                 }
             }
-        `
+        `;
 
         try {
             const response = await fetch(endpount, {
@@ -67,29 +57,36 @@ const Notes = () => {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({ query })
-            })
+            });
 
-            const data = await response.json()
+            const data = await response.json();
             console.log(data);
 
             if (data.errors) {
                 setError(data.errors);
                 console.error("GraphQL Errors:", data.errors);
-                return;  // Exit the function if there's an error
+                return;
             }
 
-            setCourse(data.data.courses[0])
-        } catch (error) {
-            console.error(error)
-            setError(error)
-        } finally {
-            setLoading(false)
-        }
-    }
+            const fetchedCourse = data.data.courses[0];
+            setCourse(fetchedCourse);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading course details</div>;
-    if (!course) return <div>No course found</div>;
+            // Automatically set the first submodule to be selected by default
+            if (fetchedCourse.chapter.length > 0 && fetchedCourse.chapter[0].submodules.length > 0) {
+                setSelectedSubmodule(fetchedCourse.chapter[0].submodules[0]);
+            }
+
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSubmoduleClick = (submodule) => {
+        setSelectedSubmodule(submodule); // Set the clicked submodule as the selected one
+    };
 
     const renderRichText = (document) => {
         if (!document || !Array.isArray(document)) {
@@ -100,15 +97,15 @@ const Notes = () => {
         return document.map((node, index) => {
             switch (node.type) {
                 case 'paragraph':
-                    return <p key={index}>{node.children?.map(child => renderText(child)).join(' ')}</p>;
+                    return <p key={index}>{node.children?.map((child, childIndex) => renderText(child, childIndex))}</p>;
 
                 case 'unordered-list':
                     return (
-                        <ul key={index}>
+                        <ul key={index} className='list-disc'>
                             {node.children?.map((listItem, listItemIndex) => (
-                                <li key={listItemIndex}>
-                                    {listItem.children?.map(listItemContent =>
-                                        listItemContent.children?.map(subChild => renderText(subChild)).join(' ')
+                                <li key={listItemIndex} className='mx-10 my-3'>
+                                    {listItem.children?.map((listItemContent, contentIndex) =>
+                                        listItemContent.children?.map((subChild, subChildIndex) => renderText(subChild, subChildIndex))
                                     )}
                                 </li>
                             ))}
@@ -117,25 +114,30 @@ const Notes = () => {
 
                 case 'ordered-list':
                     return (
-                        <ol key={index}>
+                        <ol key={index}c className='list-decimal'>
                             {node.children?.map((listItem, listItemIndex) => (
-                                <li key={listItemIndex}>
-                                    {listItem.children?.map(listItemContent =>
-                                        listItemContent.children?.map(subChild => renderText(subChild)).join(' ')
+                                <li key={listItemIndex} className='mx-10 my-3'>
+                                    {listItem.children?.map((listItemContent, contentIndex) =>
+                                        listItemContent.children?.map((subChild, subChildIndex) => renderText(subChild, subChildIndex))
                                     )}
                                 </li>
                             ))}
                         </ol>
                     );
 
-                case 'list-item':
+                case 'paragraph':
                     return (
-                        <li key={index}>
-                            {node.children?.map(listItemContent =>
-                                listItemContent.children?.map(subChild => renderText(subChild)).join(' ')
-                            )}
-                        </li>
-                    );
+                        <span key={index}>
+                            {node.children?.map((paragraphText, paragraphIndex) => {
+                                <p key={paragraphIndex} className='text-red-500'>
+                                    {paragraphText.children?.map((text) => {
+                                        text.children?.map((subChild,subChildIndex) => renderText(subChild, subChildIndex))
+                                    })}
+                                </p>
+                            })}
+                        </span>
+
+                    )
 
                 default:
                     return <div key={index}>Unknown node type: {node.type}</div>;
@@ -143,66 +145,102 @@ const Notes = () => {
         });
     };
 
-    const renderText = (textNode) => {
+    const renderText = (textNode, key) => {
         if (!textNode.text) return null;
 
         let formattedText = textNode.text;
 
-        // Apply bold
         if (textNode.bold) {
-            formattedText = <strong>{formattedText}</strong>;
+            formattedText = <strong key={key}>{formattedText}</strong>;
         }
 
-        // Apply italic
         if (textNode.italic) {
-            formattedText = <em>{formattedText}</em>;
+            formattedText = <em key={key}>{formattedText}</em>;
+        }
+
+        if (textNode.text) {
+            formattedText = <span key={key} className=''>{formattedText}</span>
         }
 
         return formattedText;
     };
 
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error loading course details</div>;
+    if (!course) return <div>No course found</div>;
+
     return (
         <div>
             <TopNav />
             <div className="flex h-auto items-start">
-                <Button onClick={() => setIsOpen(true)} className='bg-slate-400'><HiMenuAlt2 className='text-xl text-bold text-black' /></Button>
+                <Button onClick={() => setIsOpen(true)} className='bg-slate-200'>
+                    <HiMenuAlt2 className='text-xl text-bold text-black' />
+                </Button>
             </div>
-            <Drawer open={isOpen} onClose={handleClose} className='w-auto'>
+            <Drawer open={isOpen} onClose={handleClose} className='w-auto fixed'>
                 <Drawer.Header title="MENU" titleIcon={() => <></>} />
                 <Drawer.Items>
                     <Sidebar aria-label="Sidebar with multi-level dropdown example" className='w-full'>
                         <Sidebar.Items>
                             <Sidebar.ItemGroup>
                                 {course.chapter.map((chapter) => (
-                                    <div>
+                                    <div key={chapter.id}>
                                         <Sidebar.Collapse
-                                            key={chapter.id}
                                             icon={HiShoppingBag}
                                             label={chapter.title}
                                             renderChevronIcon={(theme, open) => {
                                                 const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
-
                                                 return <IconComponent aria-hidden className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])} />;
                                             }}
                                         >
                                             <div>
                                                 {chapter.submodules && chapter.submodules.map((submodule) => (
-                                                    <Sidebar.Item href="#" key={submodule.id}>{submodule.title}</Sidebar.Item>
+                                                    <Sidebar.Item
+                                                        key={submodule.id}
+                                                        onClick={() => handleSubmoduleClick(submodule)}
+                                                        className="cursor-pointer"
+                                                    >
+                                                        {submodule.title}
+                                                    </Sidebar.Item>
                                                 ))}
                                             </div>
-
-
                                         </Sidebar.Collapse>
                                     </div>
                                 ))}
-
                             </Sidebar.ItemGroup>
                         </Sidebar.Items>
                     </Sidebar>
                 </Drawer.Items>
             </Drawer>
-        </div>
-    )
-}
 
-export default Notes
+            <div className='flex w-full justify-center items-center '>
+                <div className="flex flex-col justify-center items-center py-10 px-14 shadow-lg">
+                    {selectedSubmodule ? (
+                        <div>
+                            {/* <h3>{selectedSubmodule.title}</h3> */}
+
+                            {selectedSubmodule.notes && selectedSubmodule.notes.length > 0 ? (
+                                selectedSubmodule.notes.map((note) => (
+                                    <div key={note.id}>
+                                        {note.content && Array.isArray(note.content.document) ? (
+                                            renderRichText(note.content.document) // Render rich text blocks
+                                        ) : (
+                                            <p>No content available</p>
+                                        )}
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No notes available</p>
+                            )}
+                        </div>
+                    ) : (
+                        <p>Select a submodule to view notes</p>
+                    )}
+                </div>
+            </div>
+
+        </div>
+    );
+};
+
+export default Notes;

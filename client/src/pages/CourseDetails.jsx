@@ -109,15 +109,17 @@ const CourseDetails = () => {
 
     const checkEnrollment = async (courseId) => {
         try {
-            const response = await fetch(`${node_endpoint}/api/check-enrollment?couseId=${courseId}&userId=${userId}`)
+            const response = await fetch(`${node_endpoint}/api/enrolled?couseId=${courseId}&userId=${userId}`)
             const data = await response.json();
             if (!response.ok) {
                 enqueueSnackbar('Already enrolled to course', { variant: 'error' })
-            }
+
+            } 
             console.log(data)
             setEnrolled(data.isEnrolled)
         } catch (error) {
             console.error(error)
+            enqueueSnackbar('Error checking enrollment', { variant: 'error' });
         }
     }
 
@@ -141,10 +143,13 @@ const CourseDetails = () => {
             const result = await response.json();
             console.log(result)
 
-            if (result.sucess) {
+            if (response.ok && result.success) {
                 setEnrolled(true)
                 setMessage('Successfully enrolled to the course')
                 enqueueSnackbar('Successfully enrolled to the course', { variant: 'success' })
+            } else {
+                setMessage('Failed to enroll');
+                enqueueSnackbar('Failed to enroll', { variant: 'error' });
             }
         } catch (error) {
             console.error('Error enrolling', error)
@@ -160,47 +165,6 @@ const CourseDetails = () => {
     if (error) return <div>Error loading course details</div>;
     if (!course) return <div>No course found</div>; // Handle case where no course is returned
 
-    // const renderRichText = (document) => {
-    //     if (!document || !Array.isArray(document)) {
-    //         console.log('Invalid document structure:', document);
-    //         return null;
-    //     }
-
-    //     return document.map((node, index) => {
-    //         if (node.type === 'paragraph') {
-    //             // Render a paragraph
-    //             return <p key={index}>{node.children?.map(child => child.text).join(' ')}</p>;
-    //         }
-
-    //         if (node.type === 'unordered-list') {
-    //             // Render unordered lists (bulleted lists)
-    //             return (
-    //                 <ul key={index}>
-    //                     {node.children?.map((listItem, listItemIndex) => (
-    //                         <li key={listItemIndex}>
-    //                             {listItem.children?.map(listItemContent =>
-    //                                 listItemContent.children?.map(subChild => subChild.text).join(' ')
-    //                             )}
-    //                         </li>
-    //                     ))}
-    //                 </ul>
-    //             );
-    //         }
-
-    //         if (node.type === 'list-item') {
-    //             // Render list items for ordered/unordered lists
-    //             return (
-    //                 <li key={index}>
-    //                     {node.children?.map(listItemContent =>
-    //                         listItemContent.children?.map(subChild => subChild.text).join(' ')
-    //                     )}
-    //                 </li>
-    //             );
-    //         }
-
-    //         return <div key={index}>Unknown node type: {node.type}</div>;
-    //     });
-    // };
 
     const renderRichText = (document) => {
         if (!document || !Array.isArray(document)) {
@@ -215,7 +179,7 @@ const CourseDetails = () => {
 
                 case 'unordered-list':
                     return (
-                        <ul key={index}>
+                        <ul key={index} className='list-disc'>
                             {node.children?.map((listItem, listItemIndex) => (
                                 <li key={listItemIndex}>
                                     {listItem.children?.map(listItemContent =>
@@ -228,7 +192,7 @@ const CourseDetails = () => {
 
                 case 'ordered-list':
                     return (
-                        <ol key={index}>
+                        <ol key={index} className='list-decimal'>
                             {node.children?.map((listItem, listItemIndex) => (
                                 <li key={listItemIndex}>
                                     {listItem.children?.map(listItemContent =>
@@ -275,33 +239,6 @@ const CourseDetails = () => {
 
 
     return (
-        // <div>
-        // <h1>{course.title}</h1>
-        // <p>{course.description}</p> {/* Fixed the spelling here */}
-        // {course.thumbnail && <img src={course.thumbnail.url} alt={course.title} />} {/* Render thumbnail only if it exists */}
-        // <h2>Audience</h2>
-        // {course.audience && course.audience.document && renderRichText(course.audience.document)}
-
-        // <h2>Objectives</h2>
-        // {course.objectives && course.objectives.document && renderRichText(course.objectives.document)}
-
-
-
-        //     <h2>Chapters</h2>
-        // {course.chapter.map((chapter) => (
-        //     <div key={chapter.id}>
-        //         <h3>{chapter.title}</h3>
-        //         <ul>
-        //             {chapter.submodules && chapter.submodules.map((submodule) => (
-        //                 <li key={submodule.id}>
-        //                     {submodule.title} {/* Display submodule title */}
-        //                 </li>
-        //             ))}
-        //         </ul>
-        //     </div>
-        // ))}
-        // </div>
-
         <>
             <Navbar />
             <div className='flex flex-col w-full h-auto bg-blue-200 gap-10 items-center md:flex-row lg:flex-row xl:flex-row'>
@@ -316,13 +253,10 @@ const CourseDetails = () => {
 
                 </div>
                 <div>
-                    {isEnrolled ? 
-                        <div className='px-10'>
-                            <button className='py-5 px-7 rounded-md text-white bg-green-700 hover:bg-blue-800 ease-in duration-75'>Enrolled</button>
-                        </div> : 
-                        <div className='px-10'>
-                            <button onClick={handleEnroll} className='py-5 px-7 rounded-md text-white bg-blue-700 hover:bg-blue-800 ease-in duration-75'>Enroll</button>
-                        </div>}
+                    <button onClick={handleEnroll} disabled={loading || isEnrolled} className={`px-4 py-2 font-bold text-white rounded ${
+                    isEnrolled ? 'bg-green-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
+                }`}>{loading ? 'Enrolling...' : isEnrolled ? 'Enrolled' : 'Enroll Now'}</button>
+
                 </div>
 
 
@@ -338,7 +272,7 @@ const CourseDetails = () => {
                         <span className='p-3 list-decimal'>
                             <ul className='list-decimal'>
                                 <li>
-                                {course.audience && course.audience.document && renderRichText(course.audience.document)}
+                                    {course.audience && course.audience.document && renderRichText(course.audience.document)}
 
                                 </li>
 
