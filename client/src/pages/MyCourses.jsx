@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import TopNav from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
-
+import Loading from '../components/Loading';
 
 const MyCourses = () => {
   const node_endpoint = import.meta.env.VITE_ENDPOINT;
@@ -84,7 +84,7 @@ const MyCourses = () => {
 
   // Render loading state or error message
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (errorMessage) {

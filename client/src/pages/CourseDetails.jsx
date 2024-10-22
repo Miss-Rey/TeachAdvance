@@ -6,7 +6,7 @@ import { MdDashboard } from "react-icons/md";
 import Navbar from '../components/Navbar'
 import { FcViewDetails } from "react-icons/fc";
 import { useSnackbar } from 'notistack';
-import '../styles.css'
+import Loading from '../components/Loading';
 
 
 const CourseDetails = () => {
@@ -161,7 +161,7 @@ const CourseDetails = () => {
     }
 
     // Handle loading and error states
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) return <div>Error loading course details</div>;
     if (!course) return <div>No course found</div>; // Handle case where no course is returned
 

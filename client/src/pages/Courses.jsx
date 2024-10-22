@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
 import TopNav from '../components/Navbar';
 import { Pagination } from "flowbite-react";
+import Loading from '../components/Loading';
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -53,10 +54,13 @@ const Courses = () => {
 
             const data = await response.json();
             setCourses(data.data.courses);
+            setLoading(true)
             const totalCount = data.data._allCoursesMeta ? data.data._allCoursesMeta.count : 0;
             setTotalCourses(totalCount)
         } catch (error) {
             console.error('Error fetching courses', error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -65,6 +69,7 @@ const Courses = () => {
         setCurrentPage(page)
     }
 
+    if (loading) return <Loading />;
     return (
         <>
             <TopNav />

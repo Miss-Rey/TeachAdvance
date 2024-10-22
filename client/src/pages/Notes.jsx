@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 import { useParams } from 'react-router-dom';
 import { Button, Drawer, Sidebar } from "flowbite-react";
 import TopNav from '../components/Navbar';
+import Loading from '../components/Loading';
 
 const Notes = () => {
     const { id } = useParams();
@@ -165,7 +166,7 @@ const Notes = () => {
         return formattedText;
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) return <div>Error loading course details</div>;
     if (!course) return <div>No course found</div>;
 

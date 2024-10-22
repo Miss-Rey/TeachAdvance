@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import TopNav from '../components/Navbar';
 import { Label, TextInput } from "flowbite-react";
 import { useSnackbar } from 'notistack';
+import Loading from '../components/Loading';
 
 const Profile = () => {
     const [loading, setLoading] = useState(true);
@@ -93,7 +94,7 @@ const Profile = () => {
         }
     };
 
-    if (loading) return <div>Loading....</div>;
+    if (loading) return <Loading />
     if (error) return <div>Error fetching data</div>;
 
     return (
@@ -112,9 +113,9 @@ const Profile = () => {
                             {user && (
                                 <div className="flex max-w-md flex-col gap-4">
                                     <Label htmlFor="disabledInput1">Firstname</Label>
-                                    <TextInput type="text" id="disabledInput1" placeholder="Disabled input" value={user.firstName} readOnly />
+                                    <TextInput type="text" id="disabledInput1" placeholder="Disabled input" value={user.firstname} readOnly />
                                     <Label htmlFor="disabledInput1">Lastname</Label>
-                                    <TextInput type="text" id="disabledInput1" placeholder="Disabled input" value={user.lastName} readOnly />
+                                    <TextInput type="text" id="disabledInput1" placeholder="Disabled input" value={user.lastname} readOnly />
                                     <Label htmlFor="disabledInput2">Email Address</Label>
                                     <TextInput type="text" id="disabledInput2" placeholder="Disabled readonly input" value={user.email} readOnly />
                                     <Label htmlFor="disabledInput2">Phone Number</Label>
@@ -168,7 +169,7 @@ const Profile = () => {
                                             value={formData.phone}
                                             onChange={handleChange}
                                         />
-                                        <div className='w-full flex justify-center items-center'>
+                                        <div className='w-full flex justify-center items-center p-10'>
                                             <input type='submit' value={loading ? 'Updating...' : 'Save'} className='text-sm font-semibold rounded-sm bg-blue-500 px-7 py-2 text-white hover:bg-blue-700 ease-in duration-75 cursor-pointer' />
                                         </div>
                                     </form>
