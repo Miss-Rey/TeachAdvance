@@ -12,7 +12,7 @@ const enroll = require('./Routes/enrollment.route')
 const enrolled = require('./Routes/enrolled')
 const profile = require('./Routes/profile.route')
 const editProfile = require('./Routes/editDetails.route')
-
+const admin = require('./Routes/adminSignup')
 
 const app = express();
 
@@ -38,6 +38,7 @@ app.use('/api/enroll', enroll)
 app.use('/api/enrolled', enrolled)
 app.use('/api/profile', profile)
 app.use('/api/profile', editProfile)
+app.use('/api/adminsignup', admin)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
