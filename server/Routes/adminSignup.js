@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
 const { Admin, validate } = require('../Models/admin')
-const { valid } = require('joi')
 
 router.post('/', async (req, res) => {
     try {
