@@ -1,0 +1,86 @@
+import {React, useState} from 'react'
+import { Button, Drawer, Sidebar, TextInput } from "flowbite-react";
+import {
+    HiChartPie,
+    HiClipboard,
+    HiCollection,
+    HiInformationCircle,
+    HiLogin,
+    HiPencil,
+    HiSearch,
+    HiShoppingBag,
+    HiUsers,
+    HiMenuAlt2
+} from "react-icons/hi";
+import TopNav from './Navbar';
+import { PiChalkboardTeacher } from "react-icons/pi";
+import { RiAdminLine } from "react-icons/ri";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { RiShieldUserFill } from "react-icons/ri";
+import { CiLogout } from "react-icons/ci";
+
+
+const AdminDashboard = () => {
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const handleClose = () => setIsOpen(false);
+
+    return (
+        <div>
+            <TopNav />
+            <div className="flex h-auto items-start">
+                <Button onClick={() => setIsOpen(true)} className='bg-slate-200'>
+                    <HiMenuAlt2 className='text-xl text-bold text-black' />
+                </Button>
+            </div>
+            <Drawer open={isOpen} onClose={handleClose}>
+                <Drawer.Header title="MENU" titleIcon={() => <></>} />
+                <Drawer.Items>
+                    <Sidebar
+                        aria-label="Sidebar with multi-level dropdown example"
+                        className="[&>div]:bg-transparent [&>div]:p-0"
+                    >
+                        <div className="flex h-full flex-col justify-between py-2">
+                            <div>
+                                <form className="pb-3 md:hidden">
+                                    <TextInput icon={HiSearch} type="search" placeholder="Search" required size={32} />
+                                </form>
+                                <Sidebar.Items>
+                                    <Sidebar.ItemGroup>
+                                        <Sidebar.Item href="/admindashboard" icon={HiChartPie}>
+                                            Dashboard
+                                        </Sidebar.Item>
+                                        <Sidebar.Item href="http://localhost:3000/signup" icon={PiChalkboardTeacher}>
+                                            Add Course
+                                        </Sidebar.Item>
+                                        <Sidebar.Item href="/admindashboard/addinstructor" icon={PiChalkboardTeacher}>
+                                            Add Instructor
+                                        </Sidebar.Item>
+                                        
+                                        <Sidebar.Item href="/users/list" icon={RiAdminLine}>
+                                            Add Admin
+                                        </Sidebar.Item>
+                                        <Sidebar.Item href="/authentication/sign-in" icon={RiShieldUserFill}>
+                                            Manage Instructors
+                                        </Sidebar.Item>
+                                        <Sidebar.Item href="/authentication/sign-up" icon={MdOutlineAdminPanelSettings}>
+                                            Manange Admins
+                                        </Sidebar.Item>
+                                    </Sidebar.ItemGroup>
+                                    <Sidebar.ItemGroup>
+                                        <Sidebar.Item href="https://github.com/themesberg/flowbite-react/" icon={CiLogout}>
+                                            Sign Out
+                                        </Sidebar.Item>
+                                    </Sidebar.ItemGroup>
+                                </Sidebar.Items>
+                            </div>
+                        </div>
+                    </Sidebar>
+                </Drawer.Items>
+            </Drawer>
+        </div>
+    )
+}
+
+export default AdminDashboard

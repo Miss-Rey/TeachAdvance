@@ -7,7 +7,9 @@ import Courses from "./pages/Courses"
 import Notes from "./pages/Notes"
 import MyCourses from "./pages/MyCourses"
 import profile from './pages/Profile'
-import Loading from "./components/Loading"
+import AdminLogin from './pages/AdminLogin'
+import AddInstructor from "./pages/AddInstructor"
+import AdminDashboard from "./pages/AdminDashboard"
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         <Route path="/courses/:id/notes" Component={Notes} />
         <Route path="/mycourses" Component={MyCourses} />
         <Route path="/profile" Component={profile} />
+        <Route path="/adminlogin" Component={AdminLogin} />
+        <Route path="/admindashboard" Component={AdminDashboard} />
+        <Route path="/admindashboard/addinstructor" Component={AddInstructor} />
       </Routes>
     </>
   )

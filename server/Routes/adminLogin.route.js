@@ -10,11 +10,13 @@ router.post('/', async (req, res) => {
         const admin = await Admin.findOne({email});
         if(!admin){
             res.status(401).json({message: 'user not found'})
+            return
         }
     
         const isValidPassword = await bcrypt.compare(password, admin.password)
         if(!isValidPassword) {
             res.status(400).json({message: 'Invalid username or password'})
+            return
         }
     
         const authToken = jwt.sign({adminId: admin._id, firstName: admin.firstName, lastName: admin.lastName, email:admin.email, phone: admin.phone}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})

@@ -8,12 +8,14 @@ router.post('/', async (req, res) => {
 
         if (error) {
             res.status(500).json({ message: error.details[0].message })
+            return
         }
 
         const user = await Admin.findOne({ email: req.body.email })
 
         if (user) {
             res.status(400).json({ message: 'User already exists' })
+            return
         }
 
         const salt = await bcrypt.genSalt(Number(process.env.SALT))
