@@ -29,6 +29,7 @@ router.post('/', async (req, res) => {
             courses: courses
         }).save()
 
+        console.log({...req.body})
         res.status(201).json({ message: 'Instructor successfully added' });
     } catch (error) {
         console.error(error);
