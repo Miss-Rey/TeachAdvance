@@ -21,15 +21,13 @@ router.post('/', async (req, res) => {
 
         const salt = await bcrypt.genSalt(Number(10))
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        const courses = Array.isArray(req.body.couurses) ? req.body.couurses : [req.body.couurses]
+        
         
         await new Instructor({
            ...req.body,
             password: hashedPassword,
-            courses: courses
         }).save()
 
-        console.log({...req.body})
         res.status(201).json({ message: 'Instructor successfully added' });
     } catch (error) {
         console.error(error);
