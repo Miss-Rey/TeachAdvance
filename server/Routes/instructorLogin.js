@@ -5,13 +5,6 @@ const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
     try {
-        // const { error } = validate(req.body)
-
-        // if (error) {
-        //     res.status(400).send(error)
-        //     return
-        // }
-
         const {email} = req.body
         const instructor = await Instructor.findOne({email})
         if (!instructor) {

@@ -17,6 +17,7 @@ const adminLogin = require('./Routes/adminLogin.route')
 const addInstructor = require('./Routes/addInstructor')
 const inviteinstructor = require('./Routes/inviteInstructor.route')
 const instructorLogin = require('./Routes/instructorLogin')
+const addClass = require('./Routes/addClass.route')
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/adminlogin', adminLogin)
 app.use('/api/addinstructor', addInstructor)
 app.use('/api/inviteinstructor', inviteinstructor)
 app.use('/api/instructorlogin', instructorLogin)
+app.use('/api/addclass', addClass)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
