@@ -43,6 +43,37 @@ function instructorInvitationMail(firstName, LastName, email, password, courses)
     }
 }
 
+function studentInvitation(firstName, lastName, email, className ){
+    const message = `
+        Dear ${firstName} ${lastName},
+        Welcome! You are now enrolled in the TeachAdvance course: ${className}.
+        If you already have a TeachAdvance account:
+        Simply login and go to "My Classes" tab to access your course.
+    `
+    console.log({firstName, lastName, email, className})
+
+    const mailOPtions = {
+        from: process.env.OUTLOOK_USERNAME,
+        to: email,
+        subject: 'Course Enrollment Notification',
+        text: message
+    }
+    try {
+        transporter.sendMail(mailOPtions, (error, info) => {
+            if(error) {
+                console.error(error)
+
+            } else {
+                console.log('Invitation email sent')
+            }
+        });
+        console.log(`invitation email ${email}`)
+    } catch (err){
+        console.error(err)
+    }
+}
+
 module.exports = {
-    instructorInvitationMail
+    instructorInvitationMail,
+    studentInvitation
 }

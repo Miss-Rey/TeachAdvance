@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const classSchema = new mongoose.Schema({
-    classId: {
+    courseId: {
         type: String,
         required: true
     },
-    className: {
+    courseName: {
         type: String,
         required: true
     },
@@ -17,6 +17,10 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    instructorId: {
+        type: String,
+        required: true
     }
 })
 

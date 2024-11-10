@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
-const studentsClassSchema = new mongoose.schema({
-    studentId: {
-        type: String,
-        required: true
-    },
+const studentsClassSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -20,5 +16,13 @@ const studentsClassSchema = new mongoose.schema({
     classCode: {
         type: String,
         required: true
+    },
+    className: {
+        type: String,
+        required: true
     }
 })
+
+const StudentClass = mongoose.model('studentClass', studentsClassSchema)
+
+module.exports = { StudentClass }
