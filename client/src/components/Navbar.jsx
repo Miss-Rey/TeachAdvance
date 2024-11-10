@@ -8,6 +8,7 @@ const TopNav = () => {
     const [user, setUser] = useState(null);
     const endpoint = import.meta.env.VITE_ENDPOINT;
     const userId = localStorage.getItem('UID');
+    const i = localStorage.getItem('i')
 
     useEffect(() => {
         if (userId) {
@@ -19,7 +20,7 @@ const TopNav = () => {
 
     const fetchUserData = async (userId) => {
         try {
-            const response = await fetch(`${endpoint}/api/profile?userId=${userId}`);
+            // const response = await fetch(`${endpoint}/api/profile?userId=${userId}` || `${endpoint}/api/instructorProfile?instroctorId=${userId}`);
             const data = await response.json();
 
             if (!response.ok) {
@@ -64,7 +65,7 @@ const TopNav = () => {
 
 
                     <Dropdown.Item><Link to={'/profile'}>Profile</Link></Dropdown.Item>
-                    <Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item>
+                    {i !== '1' ? <Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item> : <Dropdown.Item><Link to={'/instructordashboard'}>Dashboard</Link></Dropdown.Item> }
                     <Dropdown.Item>Certificates</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item>Sign out</Dropdown.Item>

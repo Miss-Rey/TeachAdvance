@@ -10,6 +10,8 @@ import profile from './pages/Profile'
 import AdminLogin from './pages/AdminLogin'
 import AddInstructor from "./pages/AddInstructor"
 import AdminDashboard from "./pages/AdminDashboard"
+import InstructorLogin from "./pages/InstructorLogin"
+import InstructorDashboard from "./pages/InstructorDashboard"
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/adminlogin" Component={AdminLogin} />
         <Route path="/admindashboard" Component={AdminDashboard} />
         <Route path="/admindashboard/addinstructor" Component={AddInstructor} />
+        <Route path="/instructorlogin" Component={InstructorLogin} />
+        <Route path="/instructordashboard" Component={InstructorDashboard} />
       </Routes>
     </>
   )

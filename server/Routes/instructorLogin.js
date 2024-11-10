@@ -16,15 +16,18 @@ router.post('/', async (req, res) => {
         const isValidPassword = await bcrypt.compare(req.body.password, instructor.password)
         if (!isValidPassword) {
             res.status(400).json('Invalid credentials')
+            return;
         }
 
+        const i = 1
         const accessToken = jwt.sign({ userId: instructor._id, firstName: instructor.firstName, lastName: instructor.lastName, email: instructor.email, phone: instructor.phone }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
         const refreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
         res.cookie('ac_id', accessToken, { httpOnly: true })
         res.cookie('rt_id', refreshToken, { httpOnly: true })
+        res.cookie('i', i, {httpOnly: true})
 
         res.status(200).json({
-            message: 'Login successful', accessToken, userId: instructor._id, instructor: {
+            message: 'Login successful', accessToken, i, userId: instructor._id, instructor: {
                 firstName: instructor.firstName,
                 lastName: instructor.lastName,
                 email: instructor.email,
