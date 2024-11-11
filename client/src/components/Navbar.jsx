@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const TopNav = () => {
 
     const [user, setUser] = useState(null);
+    const [error, setError] = useState('')
     const endpoint = import.meta.env.VITE_ENDPOINT;
     const userId = localStorage.getItem('UID');
     const i = localStorage.getItem('i')
@@ -21,7 +22,7 @@ const TopNav = () => {
     const fetchUserData = async (userId) => {
         try {
             // const response = await fetch(`${endpoint}/api/profile?userId=${userId}` || `${endpoint}/api/instructorProfile?instroctorId=${userId}`);
-            const data = await response.json();
+            // const data = await response.json();
 
             if (!response.ok) {
                 setError('Error fetching userdata');
@@ -33,8 +34,6 @@ const TopNav = () => {
         } catch (error) {
             console.error(error);
             setError("Error fetching data");
-        } finally {
-            setLoading(false);
         }
     };
     return (

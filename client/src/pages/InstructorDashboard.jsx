@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Table } from "flowbite-react";
+import { Table, Button } from "flowbite-react";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import TopNav from '../components/Navbar';
-
+import InvitationModal from '../components/InvitationModal';
 
 const InstructorDashboard = () => {
     const [classes, setClasses] = useState([])
+    const [details, setDetails] = useState([])
     const [instrctor, setInstructor] = useState([])
     const [loading, setLoading] = useState(false)
     const endpoint = import.meta.env.VITE_ENDPOINT;
@@ -24,8 +25,9 @@ const InstructorDashboard = () => {
             ]);
             if (classesResponse.status === 200) {
                 setClasses(classesResponse.data);
+                
             }
-            
+
             if (instructorResponse.status === 200) {
                 setInstructor(instructorResponse.data);
             }
@@ -36,10 +38,11 @@ const InstructorDashboard = () => {
             setLoading(false)
         }
     }
-
+    const [openModal, setOpenModal] = useState(false);
     return (
         <div>
             <TopNav />
+            <InvitationModal openModal={openModal} setOpenModal={setOpenModal} classes={classes} />
             <h2 className='font-bold text-2xl py-10 px-5'>My Classes</h2>
             <div className="overflow-x-auto">
 
@@ -68,7 +71,7 @@ const InstructorDashboard = () => {
                                     <Table.Cell className='font-medium text-md'>Instructor-Led</Table.Cell>
                                     <Table.Cell className='font-medium text-md'>{instrctor && (<span>{instrctor.firstname} {instrctor.lastname}</span>)}</Table.Cell>
                                     <Table.Cell className='flex justify-between'>
-                                        <a href="" className='border-blue-500 border-2 px-2 py-1 font-semibold hover:bg-blue-600 hover:text-white duration-75 ease-in rounded-lg'>Invite Learners</a>
+                                        <Button onClick={() => setOpenModal(true)}>Invite Student</Button>
                                         <a href="#" className="font-medium text-3xl text-cyan-600 hover:underline dark:text-cyan-500">
                                             <PiDotsThreeOutlineFill />
                                         </a>
