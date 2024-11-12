@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
             return
         }
 
-        await new StudentClass({ firstName, lastName, email, classCode, className }).save()
+        await new StudentClass({ firstName, lastName, email, classCode, className, status: 'In Progress', suspended: false }).save()
         studentInvitation(firstName, lastName, email, className)
         res.status(201).json({ message: 'Enrollment successfull' })
     } catch (error) {

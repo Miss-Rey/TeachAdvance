@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
             return
         }
 
+        console.log(classes)
         res.status(200).json(classes)
     } catch (error) {
         res.status(500).send('Server error')

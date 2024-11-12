@@ -1,3 +1,4 @@
+const { required } = require('joi')
 const mongoose = require('mongoose')
 
 const studentsClassSchema = new mongoose.Schema({
@@ -20,6 +21,14 @@ const studentsClassSchema = new mongoose.Schema({
     className: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
+    suspended: {
+        type: String,
+        required: true,
     }
 })
 

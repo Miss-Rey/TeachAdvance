@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Table, Button } from "flowbite-react";
+import { Table, Button, Dropdown } from "flowbite-react";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import TopNav from '../components/Navbar';
 import InvitationModal from '../components/InvitationModal';
+import { Link } from 'react-router-dom';
 
 const InstructorDashboard = () => {
     const [classes, setClasses] = useState([])
-    const [details, setDetails] = useState([])
+    const [code, setCode] = useState('')
     const [instrctor, setInstructor] = useState([])
     const [loading, setLoading] = useState(false)
     const endpoint = import.meta.env.VITE_ENDPOINT;
     const instructorId = localStorage.getItem('UID')
+
 
     useEffect(() => {
         fetchClasses()
@@ -25,7 +27,6 @@ const InstructorDashboard = () => {
             ]);
             if (classesResponse.status === 200) {
                 setClasses(classesResponse.data);
-                
             }
 
             if (instructorResponse.status === 200) {
@@ -43,8 +44,9 @@ const InstructorDashboard = () => {
         <div>
             <TopNav />
             <InvitationModal openModal={openModal} setOpenModal={setOpenModal} classes={classes} />
+            {/* <CoursePopover /> */}
             <h2 className='font-bold text-2xl py-10 px-5'>My Classes</h2>
-            <div className="overflow-x-auto">
+            <div className="">
 
                 <Table hoverable>
                     <Table.Head>
@@ -59,7 +61,7 @@ const InstructorDashboard = () => {
                     <Table.Body className="divide-y">
                         {classes.map((Class) => {
                             return (
-                                <Table.Row key={Class._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                <Table.Row key={Class.classCode} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                         <div>{Class.classCode}</div>
                                         <div>{Class.className}</div>
@@ -71,17 +73,21 @@ const InstructorDashboard = () => {
                                     <Table.Cell className='font-medium text-md'>Instructor-Led</Table.Cell>
                                     <Table.Cell className='font-medium text-md'>{instrctor && (<span>{instrctor.firstname} {instrctor.lastname}</span>)}</Table.Cell>
                                     <Table.Cell className='flex justify-between'>
-                                        <Button onClick={() => setOpenModal(true)}>Invite Student</Button>
-                                        <a href="#" className="font-medium text-3xl text-cyan-600 hover:underline dark:text-cyan-500">
-                                            <PiDotsThreeOutlineFill />
-                                        </a>
+                                        <Button className='bg-transparent border-blue-600 border-2 text-black rounded-lg hover:bg-blue-300 hover:text-white duration-75 ease-in ' onClick={() => setOpenModal(true)}>Invite Student</Button>
+                                        <Dropdown label='' placement="left" renderTrigger={() => <span className='flex justify-center items-center'><PiDotsThreeOutlineFill className='text-3xl text-blue-600 cursor-pointer hover:text-blue-500 duration-75 ease-in'/></span>}>
+                                            <Dropdown.Item>Manage Course</Dropdown.Item>
+                                            <Dropdown.Divider />
+                                            <Dropdown.Item><Link to={`/${encodeURIComponent(Class.classCode)}/managelearners`} state={{val: 'welcome to my website'}}>Manage Learners</Link></Dropdown.Item>
+                                        </Dropdown>
                                     </Table.Cell>
                                 </Table.Row>
+
                             );
                         })}
 
                     </Table.Body>
                 </Table>
+                
             </div>
         </div>
     )

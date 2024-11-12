@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
 
         if (!instructor) {
             res.status(400).json({ success: false, message: 'Instructor not found' })
+            return
         }
 
         res.status(200).json({
