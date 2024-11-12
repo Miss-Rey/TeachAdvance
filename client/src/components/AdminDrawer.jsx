@@ -61,7 +61,7 @@ const AdminDashboard = () => {
                                         <Sidebar.Item href="/users/list" icon={RiAdminLine}>
                                             Add Admin
                                         </Sidebar.Item>
-                                        <Sidebar.Item href="/authentication/sign-in" icon={RiShieldUserFill}>
+                                        <Sidebar.Item href="/admindashboard/manageinstructors" icon={RiShieldUserFill}>
                                             Manage Instructors
                                         </Sidebar.Item>
                                         <Sidebar.Item href="/authentication/sign-up" icon={MdOutlineAdminPanelSettings}>

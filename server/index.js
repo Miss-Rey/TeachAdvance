@@ -23,6 +23,7 @@ const getClasses = require('./Routes/getClasses')
 const getStudentClasses = require('./Routes/getStudentClasses')
 const getInstructorProfile = require('./Routes/getInstructorProfile')
 const getLearners = require('./Routes/getLearners')
+const getInstuctors = require('./Routes/getInstructors')
 
 const app = express();
 
@@ -59,6 +60,7 @@ app.use('/api/getclasses', getClasses)
 app.use('/api/getStudentClasses', getStudentClasses)
 app.use('/api/instructorProfile', getInstructorProfile)
 app.use('/api/getlearners', getLearners)
+app.use('/api/getinstructors', getInstuctors)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
