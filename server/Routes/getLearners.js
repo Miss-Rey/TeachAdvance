@@ -4,7 +4,7 @@ const { StudentClass } = require('../Models/studentClass')
 router.get('/', async (req,res) => {
     try{
         const classCode = req.query;
-
+        console.log(classCode)
         if(!classCode) {
             res.status(400).json('No classCode found')
             return

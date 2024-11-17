@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 
@@ -87,8 +87,8 @@ const Login = () => {
           </div>
           <Button type="submit" onClick={handleSubmit}>Submit</Button>
           <div className='flex justify-center gap-5 text-sm text-blue-500 cursor-pointer hover:text-blue-800 ease in duration-75'>
-            <h2 className='border-r-2 px-7'><a href="">Register</a></h2>
-            <h2><a href="">Forgot Password</a></h2>
+            <h2 className='border-r-2 px-7'><Link to={'/register'}>Register</Link></h2>
+            <h2>Forgot Password</h2>
           </div>
 
         </form>

@@ -9,6 +9,7 @@ const Profile = () => {
     const [error, setError] = useState('');
     const [user, setUser] = useState(null);
     const [edit, setEdit] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false)
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -23,6 +24,7 @@ const Profile = () => {
     useEffect(() => {
         if (userId) {
             fetchUserData(userId);
+            setLoggedIn(true)
         } else {
             setError('Please login');
         }
@@ -84,6 +86,7 @@ const Profile = () => {
                 setEdit(false); // Return to view mode
             } else {
                 enqueueSnackbar(result.message || 'Failed to update user details', { variant: 'error' });
+                return
             }
 
         } catch (error) {

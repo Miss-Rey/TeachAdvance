@@ -87,11 +87,6 @@ const InstructorLogin = () => {
             <Label htmlFor="remember">Remember me</Label>
           </div>
           <Button type="submit" onClick={handleSubmit}>Login</Button>
-          <div className='flex justify-center gap-5 text-sm text-blue-500 cursor-pointer hover:text-blue-800 ease in duration-75'>
-            <h2 className='border-r-2 px-7'><a href="">Register</a></h2>
-            <h2><a href="">Forgot Password</a></h2>
-          </div>
-
         </form>
 
         <div className='hidden md:flex lg:flex xl:flex 2xl:flex w-full h-10 items-center text-sm bg-slate-400 px-10'>

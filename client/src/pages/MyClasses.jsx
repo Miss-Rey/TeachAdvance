@@ -73,7 +73,7 @@ const MyCourses = () => {
             });
 
             const data = await response.json();
-            console.log('Fetched Courses:', data); // Debugging line
+            console.log('Fetched Courses:', data); 
 
             if (data.data && data.data.courses) {
                 setEnrolledCourses(data.data.courses); // Update state with fetched courses
@@ -98,12 +98,12 @@ const MyCourses = () => {
     return (
         <>
             <TopNav />
-            <div className='flex flex-col h-auto md:grid lg:grid xl:grid 2xl:grid grid-cols-4 gap-5 m-5 md:m-10 lg:m-10 xl:m-10 2xl:m-10'>
+            <div className=''>
                 {enrolledCourses.length === 0 ? (
                     <div>No enrolled courses available.</div>
                 ) : (
                     enrolledCourses.map((course) => (
-                        <div key={course.id} className='flex flex-col bg-slate-100 rounded-md h-auto'>
+                        <div key={course.id} className=' flex flex-col h-auto md:grid lg:grid xl:grid 2xl:grid grid-cols-4 gap-5 m-5 md:m-10 lg:m-10 xl:m-10 2xl:m-10'>
                             {classCode.map((code) => (
                                 <div className='h-auto'>
                                     <div className='h-[200px]'>

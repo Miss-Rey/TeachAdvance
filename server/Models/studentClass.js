@@ -27,8 +27,9 @@ const studentsClassSchema = new mongoose.Schema({
         required: true
     },
     suspended: {
-        type: String,
+        type: Boolean,
         required: true,
+        default: false
     }
 })
 

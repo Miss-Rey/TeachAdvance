@@ -6,6 +6,7 @@ router.get('/', async (req, res) => {
 
     try {
         const enrollments = await Enrollment.find({ userId }).populate('courseId')
+        console.log(enrollments)
 
         const courses = enrollments.map(enrollment => ({
             id: enrollment.courseId

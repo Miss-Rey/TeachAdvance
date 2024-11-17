@@ -1,19 +1,22 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-
+import { SessionContext } from '../hooks/SignOut';
 
 const TopNav = () => {
 
     const [user, setUser] = useState(null);
     const [error, setError] = useState('')
+    const [loggedIn, setLoggedIn] = useState(false)
     const endpoint = import.meta.env.VITE_ENDPOINT;
     const userId = localStorage.getItem('UID');
     const i = localStorage.getItem('i')
+    const { SignOut } = useContext(SessionContext)
 
     useEffect(() => {
         if (userId) {
             fetchUserData(userId);
+            setLoggedIn(true)
         } else {
             setError('Please login');
         }
@@ -43,33 +46,39 @@ const TopNav = () => {
                 <span className="self-center whitespace-nowrap text-sm lg:text-xl xl:text-xl md:text-xl text-black font-semibold "><Link to={'/'}>TeachAdvance</Link></span>
             </Navbar.Brand>
             <div className="flex md:order-2 gap-1 justify-bottom items-bottom">
+                {loggedIn ? (
+                    <div>
+                        <Dropdown
+                            arrowIcon={false}
+                            inline
+                            label={
+                                <Avatar alt="User settings" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkoyUQaux4PEUmEPGc7PodeN8XbgC4aOBsug&usqp=CAUhttps://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" rounded />
+                            }
+                        >
+                            {user && (
+                                <Dropdown.Header>
+                                    <div className='flex gap-1'>
+                                        <span className="block text-sm">{user.firstname}</span>
+                                        <span className="block text-sm">{user.lastname}</span>
+                                    </div>
+                                    <span className="block truncate text-sm font-medium">{user.email}</span>
 
-                <Dropdown
-                    arrowIcon={false}
-                    inline
-                    label={
-                        <Avatar alt="User settings" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkoyUQaux4PEUmEPGc7PodeN8XbgC4aOBsug&usqp=CAUhttps://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" rounded />
-                    }
-                >
-                    {user && (
-                        <Dropdown.Header>
-                            <div className='flex gap-1'>
-                                <span className="block text-sm">{user.firstname}</span>
-                                <span className="block text-sm">{user.lastname}</span>
-                            </div>
-                            <span className="block truncate text-sm font-medium">{user.email}</span>
-
-                        </Dropdown.Header>
-                    )}
+                                </Dropdown.Header>
+                            )}
 
 
-                    <Dropdown.Item><Link to={'/profile'}>Profile</Link></Dropdown.Item>
-                    {i !== '1' ? <div><Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item> <Dropdown.Item><Link to={'/myclasses'}>My Classes</Link></Dropdown.Item></div>  : <Dropdown.Item><Link to={'/instructordashboard'}>Dashboard</Link></Dropdown.Item> }
-                    <Dropdown.Item>Certificates</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-                <Navbar.Toggle />
+                            <Dropdown.Item><Link to={'/profile'}>Profile</Link></Dropdown.Item>
+                            {i !== '1' ? <div><Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item> <Dropdown.Item><Link to={'/myclasses'}>My Classes</Link></Dropdown.Item></div> : <Dropdown.Item><Link to={'/instructordashboard'}>Dashboard</Link></Dropdown.Item>}
+                            <Dropdown.Item>Certificates</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item onClick={SignOut}>Sign out</Dropdown.Item>
+                        </Dropdown>
+                        <Navbar.Toggle />
+                    </div>
+                ) : (
+                    <Button><Link to={'/login'}>Login</Link></Button>
+                )}
+
 
             </div>
 
@@ -78,11 +87,8 @@ const TopNav = () => {
                     Home
                 </Navbar.Link>
                 <Navbar.Link href="/courses" className='text-black'>Courses</Navbar.Link>
-                {/* <Navbar.Link href="/about" className='text-black'>About</Navbar.Link> */}
-                {/* <Navbar.Link href="/reservation" className='text-black'>Reservation</Navbar.Link> */}
-                {/* <Navbar.Link href="/gallery" className='text-black'>Gallery</Navbar.Link> */}
-                {/* <Navbar.Link href="/contacts" className='text-black'>Contacts</Navbar.Link> */}
-
+                <Navbar.Link href="/about" className='text-black'>About</Navbar.Link>
+                <Navbar.Link href="/reservation" className='text-black'>Contact Us</Navbar.Link>
             </Navbar.Collapse>
         </Navbar>
     )

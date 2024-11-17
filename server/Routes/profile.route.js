@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
 
         if (!user) {
             res.status(400).json({ success: false, message: 'User not found' })
+            return
         }
 
         res.status(200).json({

@@ -4,6 +4,7 @@ import { Table, Button, Dropdown } from "flowbite-react";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import TopNav from '../components/Navbar';
 import InvitationModal from '../components/InvitationModal';
+import ManageCourseModal from '../components/ManageCourseModal'
 import { Link } from 'react-router-dom';
 
 const InstructorDashboard = () => {
@@ -40,10 +41,12 @@ const InstructorDashboard = () => {
         }
     }
     const [openModal, setOpenModal] = useState(false);
+    const [manageClass, setManageClassModal] = useState(false)
     return (
         <div>
             <TopNav />
             <InvitationModal openModal={openModal} setOpenModal={setOpenModal} classes={classes} />
+            <ManageCourseModal manageClass={manageClass} setManageClassModal={setManageClassModal} classes={classes}/>
             {/* <CoursePopover /> */}
             <h2 className='font-bold text-2xl py-10 px-5'>My Classes</h2>
             <div className="">
@@ -75,7 +78,7 @@ const InstructorDashboard = () => {
                                     <Table.Cell className='flex justify-between'>
                                         <Button className='bg-transparent border-blue-600 border-2 text-black rounded-lg hover:bg-blue-300 hover:text-white duration-75 ease-in ' onClick={() => setOpenModal(true)}>Invite Student</Button>
                                         <Dropdown label='' placement="left" renderTrigger={() => <span className='flex justify-center items-center'><PiDotsThreeOutlineFill className='text-3xl text-blue-600 cursor-pointer hover:text-blue-500 duration-75 ease-in'/></span>}>
-                                            <Dropdown.Item>Manage Course</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => setManageClassModal(true)}>Manage Course</Dropdown.Item>
                                             <Dropdown.Divider />
                                             <Dropdown.Item><Link to={`/${encodeURIComponent(Class.classCode)}/managelearners`} state={{val: 'welcome to my website'}}>Manage Learners</Link></Dropdown.Item>
                                         </Dropdown>
