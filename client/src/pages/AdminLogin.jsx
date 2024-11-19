@@ -65,7 +65,7 @@ const Login = () => {
         </div>
         <div>
           <h2 className='font-bold text-xl '>
-            TeachAdvance Login
+            TeachAdvance Admin Login
           </h2>
         </div>
         <form className="flex w-72 md:w-96 lg:w-96 xl:w-96 2xl:w-96 flex-col gap-4">
@@ -86,10 +86,7 @@ const Login = () => {
             <Label htmlFor="remember">Remember me</Label>
           </div>
           <Button type="submit" onClick={handleSubmit}>Submit</Button>
-          <div className='flex justify-center gap-5 text-sm text-blue-500 cursor-pointer hover:text-blue-800 ease in duration-75'>
-            <h2 className='border-r-2 px-7'><a href="">Register</a></h2>
-            <h2><a href="">Forgot Password</a></h2>
-          </div>
+          
 
         </form>
 

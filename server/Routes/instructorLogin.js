@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
         res.cookie('i', i, {httpOnly: true})
 
         res.status(200).json({
-            message: 'Login successful', accessToken, i, userId: instructor._id, instructor: {
+            message: 'Login successful', accessToken, i, userId: instructor._id, email: instructor.email ,instructor: {
                 firstName: instructor.firstName,
                 lastName: instructor.lastName,
                 email: instructor.email,

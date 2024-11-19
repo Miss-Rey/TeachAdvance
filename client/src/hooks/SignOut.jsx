@@ -5,7 +5,6 @@ const SessionContext = createContext();
 const SessionProvider = ({ children }) => {
   const timeoutRef = useRef(null);
 
-  // Sign-out function
   const signOut = useCallback(() => {
     console.log('Sign out triggered'); // Debug log
     localStorage.clear();

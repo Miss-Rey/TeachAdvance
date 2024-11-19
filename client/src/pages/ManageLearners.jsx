@@ -4,6 +4,7 @@ import { Table, Button, Dropdown } from 'flowbite-react'
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import TopNav from '../components/Navbar';
 import axios from 'axios'
+import { useSnackbar } from 'notistack';
 
 const ManageLearners = () => {
     const { classCode } = useParams()
@@ -11,6 +12,7 @@ const ManageLearners = () => {
     const endpoint = import.meta.env.VITE_ENDPOINT
     const [learners, setLearners] = useState([])
     const [className, setClass] = useState('')
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         fetchLearners()
@@ -29,8 +31,10 @@ const ManageLearners = () => {
         try {
             const response = await axios.delete(`${endpoint}/api/unenrollstudent?email=${email}`)
             console.log("Student unenrolled successfully")
+            enqueueSnackbar('Student unenrolled successfully', {variant: 'success'})
             fetchLearners()
         } catch (error) {
+            enqueueSnackbar('Failed to unenroll student', {variant: 'error'})
             console.error(error)
         }
     }

@@ -35,10 +35,11 @@ const InstructorLogin = () => {
         const response = await axios.post(`${endpoint}/api/instructorlogin`, { email, password })
 
         if (response.status === 200) {
-          const { accessToken, userId, i } = response.data;
+          const { accessToken, userId, i, email } = response.data;
           localStorage.setItem('at', accessToken)
           localStorage.setItem('UID', userId)
           localStorage.setItem('i', i)
+          localStorage.setItem('e', email)
           enqueueSnackbar('Login Successful', { variant: 'success' })
           console.log(response.data)
 

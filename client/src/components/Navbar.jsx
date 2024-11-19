@@ -11,7 +11,6 @@ const TopNav = () => {
     const endpoint = import.meta.env.VITE_ENDPOINT;
     const userId = localStorage.getItem('UID');
     const i = localStorage.getItem('i')
-    const { SignOut } = useContext(SessionContext)
 
     useEffect(() => {
         if (userId) {
@@ -39,6 +38,11 @@ const TopNav = () => {
             setError("Error fetching data");
         }
     };
+    
+    const signOut = () => {
+        localStorage.clear()
+        window.location.href = '/login'
+    }
     return (
 
         <Navbar fluid rounded className='border-b-2 list-none'>
@@ -71,7 +75,7 @@ const TopNav = () => {
                             {i !== '1' ? <div><Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item> <Dropdown.Item><Link to={'/myclasses'}>My Classes</Link></Dropdown.Item></div> : <Dropdown.Item><Link to={'/instructordashboard'}>Dashboard</Link></Dropdown.Item>}
                             <Dropdown.Item>Certificates</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item onClick={SignOut}>Sign out</Dropdown.Item>
+                            <Dropdown.Item onClick={() => signOut()}>Sign out</Dropdown.Item>
                         </Dropdown>
                         <Navbar.Toggle />
                     </div>

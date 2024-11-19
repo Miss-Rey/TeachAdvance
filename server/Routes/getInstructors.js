@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const { Instructor } = require('../Models/addInstructor')
-const { route } = require('./user.route')
 
 router.get('/', async (req, res) => {
     try{
-        const instructor = await Instructor.find()
+        const { email} = req.query
+        const instructor = await Instructor.findOne({email})
 
         res.status(200).json(instructor)
         console.log(instructor)

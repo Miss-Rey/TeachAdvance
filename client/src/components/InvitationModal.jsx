@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Button, Label, Modal, TextInput } from "flowbite-react";
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 const InvitationModal = ({openModal, setOpenModal, classes, setClasses}) => {
 
@@ -8,6 +9,7 @@ const InvitationModal = ({openModal, setOpenModal, classes, setClasses}) => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const endpoint = import.meta.env.VITE_ENDPOINT
+    const { enqueueSnackbar } = useSnackbar()
 
     const handleInvite = async (e) => {
         try{
@@ -21,6 +23,7 @@ const InvitationModal = ({openModal, setOpenModal, classes, setClasses}) => {
 
             if(response.status === 200){
                 console.log('Student Invite successfull')
+                enqueueSnackbar('Student Invited Successfull', {variant: 'success'})
             }
 
             setFirstName('')

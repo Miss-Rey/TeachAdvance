@@ -53,6 +53,7 @@ const Courses = () => {
             })
 
             const data = await response.json();
+            console.log(data)
             setCourses(data.data.courses);
             setLoading(true)
             const totalCount = data.data._allCoursesMeta ? data.data._allCoursesMeta.count : 0;

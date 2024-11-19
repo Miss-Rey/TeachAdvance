@@ -4,6 +4,8 @@ import { Tabs, Button, Label, TextInput, } from 'flowbite-react'
 import { MdDashboard } from "react-icons/md";
 import axios from 'axios'
 import { FaLandmarkDome } from 'react-icons/fa6';
+import { useSnackbar } from 'notistack';
+
 
 export const ManualAddInstructor = () => {
 
@@ -17,6 +19,8 @@ export const ManualAddInstructor = () => {
     const [loading, setLoading] = useState(false)
     const endpoint = import.meta.env.VITE_ENDPOINT
     const keystone_endpoint = import.meta.env.VITE_KEYSTONE
+    const { enqueueSnackbar } = useSnackbar()
+
     const handleFirstnameChange = (e) => {
         setFirstName(e.target.value)
     }
@@ -96,6 +100,7 @@ export const ManualAddInstructor = () => {
 
             if (response.status === 200) {
                 console.log("Instructor added successfully")
+                enqueueSnackbar('Instructor added successfully', {variant: 'success'})
             }
 
             setFirstName('')

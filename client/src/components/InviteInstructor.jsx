@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react'
 import { Button, Label, TextInput, } from 'flowbite-react'
 import axios from 'axios'
+import { useSnackbar } from 'notistack';
+
 const InviteInstructor = () => {
 
     const [firstName, setFirstName] = useState('')
@@ -13,6 +15,8 @@ const InviteInstructor = () => {
     const [loading, setLoading] = useState(false)
     const endpoint = import.meta.env.VITE_ENDPOINT
     const keystone_endpoint = import.meta.env.VITE_KEYSTONE
+    const { enqueueSnackbar } = useSnackbar()
+
     const handleFirstnameChange = (e) => {
         setFirstName(e.target.value)
     }
@@ -92,6 +96,7 @@ const InviteInstructor = () => {
 
             if (response.status === 200) {
                 console.log("Instructor added successfully")
+                enqueueSnackbar('Instructor invited successfully', {variant: 'success'})
             }
 
             setFirstName('')

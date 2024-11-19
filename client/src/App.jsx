@@ -16,6 +16,7 @@ import MyClasses from "./pages/MyClasses"
 import ManageLearners from "./pages/ManageLearners"
 import ManageInstructors from "./pages/manageInstructors"
 import ManageCourseModal from "./components/ManageCourseModal"
+import CreateClass from "./components/CreateClass"
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/:classCode/managelearners" Component={ManageLearners} />
         <Route path="/admindashboard/manageinstructors" Component={ManageInstructors} />
         <Route path="/:classCode/manageclass" Component={ManageCourseModal} />
+        <Route path="/instructordashboard/createclass" Component={CreateClass} />
       </Routes>
     </>
   )

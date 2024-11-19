@@ -50,7 +50,7 @@ const InstructorDashboard = () => {
             {/* <CoursePopover /> */}
             <h2 className='font-bold text-2xl py-10 px-5'>My Classes</h2>
             <div className="">
-
+                <Button><Link to={'/instructordashboard/createclass'}>Create Class</Link></Button>
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>Class</Table.HeadCell>
