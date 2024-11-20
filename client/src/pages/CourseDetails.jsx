@@ -20,6 +20,7 @@ const CourseDetails = () => {
     const endpoint = import.meta.env.VITE_KEYSTONE;
     const node_endpoint = import.meta.env.VITE_ENDPOINT
     const { enqueueSnackbar } = useSnackbar()
+    const i = localStorage.getItem('i')
 
     useEffect(() => {
         fetchCourseDetails(id);
@@ -114,7 +115,7 @@ const CourseDetails = () => {
             if (!response.ok) {
                 enqueueSnackbar('Already enrolled to course', { variant: 'error' })
 
-            } 
+            }
             console.log(data)
             setEnrolled(data.isEnrolled)
         } catch (error) {
@@ -253,9 +254,14 @@ const CourseDetails = () => {
 
                 </div>
                 <div>
-                    <button onClick={handleEnroll} disabled={loading || isEnrolled} className={`px-4 py-2 font-bold text-white rounded ${
-                    isEnrolled ? 'bg-green-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
-                }`}>{loading ? 'Enrolling...' : isEnrolled ? 'Enrolled' : 'Enroll Now'}</button>
+                    {!i ? (
+                        <button onClick={handleEnroll} disabled={loading || isEnrolled} className={`px-4 py-2 font-bold text-white rounded ${isEnrolled ? 'bg-green-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
+                            }`}>{loading ? 'Enrolling...' : isEnrolled ? 'Enrolled' : 'Enroll Now'}
+                        </button>
+                    ) : (
+                        <div></div>
+                        )}
+
 
                 </div>
 

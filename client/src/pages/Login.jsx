@@ -65,7 +65,7 @@ const Login = () => {
         </div>
         <div>
           <h2 className='font-bold text-xl '>
-            TeachAdvance Login
+            TeachAdvance Student Login
           </h2>
         </div>
         <form className="flex w-72 md:w-96 lg:w-96 xl:w-96 2xl:w-96 flex-col gap-4">

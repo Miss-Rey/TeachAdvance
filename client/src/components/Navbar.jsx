@@ -72,7 +72,9 @@ const TopNav = () => {
 
 
                             <Dropdown.Item><Link to={'/profile'}>Profile</Link></Dropdown.Item>
-                            {i !== '1' ? <div><Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item> <Dropdown.Item><Link to={'/myclasses'}>My Classes</Link></Dropdown.Item></div> : <Dropdown.Item><Link to={'/instructordashboard'}>Dashboard</Link></Dropdown.Item>}
+                            {!i && <div><Dropdown.Item><Link to={'/mycourses'}>My Courses</Link></Dropdown.Item> <Dropdown.Item><Link to={'/myclasses'}>My Classes</Link></Dropdown.Item></div>}
+                            {i === '1' && <Dropdown.Item><Link to={'/instructordashboard'}>Dashboard</Link></Dropdown.Item>}
+                            {i === '2' && <Dropdown.Item><Link to={'/admindashboard'}>Dashboard</Link></Dropdown.Item>}
                             <Dropdown.Item>Certificates</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item onClick={() => signOut()}>Sign out</Dropdown.Item>

@@ -18,13 +18,15 @@ router.post('/', async (req, res) => {
             res.status(400).json({message: 'Invalid username or password'})
             return
         }
-    
-        const authToken = jwt.sign({adminId: admin._id, firstName: admin.firstName, lastName: admin.lastName, email:admin.email, phone: admin.phone}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
+        
+        const i = 2
+        const authToken = jwt.sign({adminId: admin._id,firstName: admin.firstName, lastName: admin.lastName, email:admin.email, phone: admin.phone}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
         const refreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '7d'})
         res.cookie('ac_tk', authToken, {httpOnly: true})
         res.cookie('rf_tk', refreshToken, {httpOnly: true})
+        res.cookie('i', i, {httpOnly: true})
     
-        res.status(200).json({message: 'Login successful', authToken, adminId: admin._id, admin: {
+        res.status(200).json({message: 'Login successful', authToken, i, adminId: admin._id, admin: {
             firstName: admin.firstName,
             lastName: admin.lastName,
             email: admin.email,

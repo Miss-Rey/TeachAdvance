@@ -26,6 +26,11 @@ const AdminDashboard = () => {
 
     const handleClose = () => setIsOpen(false);
 
+    const signout = () => {
+        localStorage.clear()
+        window.location.href = '/login'
+    }
+
     return (
         <div>
             <TopNav />
@@ -48,9 +53,9 @@ const AdminDashboard = () => {
                                 </form>
                                 <Sidebar.Items>
                                     <Sidebar.ItemGroup>
-                                        <Sidebar.Item href="/admindashboard" icon={HiChartPie}>
+                                        {/* <Sidebar.Item href="/admindashboard" icon={HiChartPie}>
                                             Dashboard
-                                        </Sidebar.Item>
+                                        </Sidebar.Item> */}
                                         <Sidebar.Item href="http://localhost:3000/signup" icon={PiChalkboardTeacher}>
                                             Add Course
                                         </Sidebar.Item>
@@ -58,18 +63,18 @@ const AdminDashboard = () => {
                                             Add Instructor
                                         </Sidebar.Item>
                                         
-                                        <Sidebar.Item href="/users/list" icon={RiAdminLine}>
+                                        <Sidebar.Item href="/admindashboard/addadmin" icon={RiAdminLine}>
                                             Add Admin
                                         </Sidebar.Item>
                                         <Sidebar.Item href="/admindashboard/manageinstructors" icon={RiShieldUserFill}>
                                             Manage Instructors
                                         </Sidebar.Item>
-                                        <Sidebar.Item href="/authentication/sign-up" icon={MdOutlineAdminPanelSettings}>
+                                        <Sidebar.Item href="/admindashboard/manageadmin" icon={MdOutlineAdminPanelSettings}>
                                             Manange Admins
                                         </Sidebar.Item>
                                     </Sidebar.ItemGroup>
                                     <Sidebar.ItemGroup>
-                                        <Sidebar.Item href="https://github.com/themesberg/flowbite-react/" icon={CiLogout}>
+                                        <Sidebar.Item className='cursor-pointer' onClick={() => signout()} icon={CiLogout}>
                                             Sign Out
                                         </Sidebar.Item>
                                     </Sidebar.ItemGroup>

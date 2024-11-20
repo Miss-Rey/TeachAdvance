@@ -100,7 +100,7 @@ export const ManualAddInstructor = () => {
 
             if (response.status === 200) {
                 console.log("Instructor added successfully")
-                enqueueSnackbar('Instructor added successfully', {variant: 'success'})
+                enqueueSnackbar('Instructor added successfully', { variant: 'success' })
             }
 
             setFirstName('')
@@ -113,73 +113,73 @@ export const ManualAddInstructor = () => {
         }
     }
 
-    if(loading) return <div>Loading...</div>
-  return (
-    <div>
-        <form className="flex max-w-md flex-col gap-4 mx-10">
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="firstName" value="FirstName" />
-                                </div>
-                                <TextInput id="firstName" type="text" placeholder="John" value={firstName} onChange={handleFirstnameChange} required shadow />
+    if (loading) return <div>Loading...</div>
+    return (
+        <div>
+            <form className="flex max-w-md flex-col gap-4 mx-10">
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="firstName" value="FirstName" />
+                    </div>
+                    <TextInput id="firstName" type="text" placeholder="John" value={firstName} onChange={handleFirstnameChange} required shadow />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="lastName" value="LastName" />
+                    </div>
+                    <TextInput id="lastName" type="text" placeholder="Doe" value={lastName} onChange={handleLastnameChange} required shadow />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="email" value='Email' />
+                    </div>
+                    <TextInput id="email" type="eamil" placeholder="johndoe@example.com" value={email} onChange={handleEmailChange} required shadow />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="phone" value='Phone Number' />
+                    </div>
+                    <TextInput id="phone" type="tel" placeholder="0712345678" value={phone} onChange={handlePhoneChange} required shadow />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="courses" value='Courses' />
+                    </div>
+                    <div id="courses" className="form-group">
+                        {programs.map((program) => (
+                            <div key={program.id} className="form-check">
+                                <input
+                                    type="checkbox"
+                                    id={`course-${program.id}`}
+                                    value={program.id} // Send the ID, not the title
+                                    onChange={(e) => {
+                                        const courseId = e.target.value;
+                                        if (e.target.checked) {
+                                            // Add the selected course ID to the state
+                                            setCourses((prevCourses) => [...prevCourses, courseId]);
+                                        } else {
+                                            // Remove the unselected course ID from the state
+                                            setCourses((prevCourses) => prevCourses.filter((id) => id !== courseId));
+                                        }
+                                    }}
+                                    className="form-check-input"
+                                />
+                                <label htmlFor={`course-${program.id}`} className="form-check-label">
+                                    {program.title}
+                                </label>
                             </div>
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="lastName" value="LastName" />
-                                </div>
-                                <TextInput id="lastName" type="text" placeholder="Doe" value={lastName} onChange={handleLastnameChange} required shadow />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="email" value='Email' />
-                                </div>
-                                <TextInput id="email" type="eamil" placeholder="johndoe@example.com" value={email} onChange={handleEmailChange} required shadow />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="phone" value='Phone Number' />
-                                </div>
-                                <TextInput id="phone" type="tel" placeholder="0712345678" value={phone} onChange={handlePhoneChange} required shadow />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="courses" value='Courses' />
-                                </div>
-                                <div id="courses" className="form-group">
-                                    {programs.map((program) => (
-                                        <div key={program.id} className="form-check">
-                                            <input
-                                                type="checkbox"
-                                                id={`course-${program.id}`}
-                                                value={program.id} // Send the ID, not the title
-                                                onChange={(e) => {
-                                                    const courseId = e.target.value;
-                                                    if (e.target.checked) {
-                                                        // Add the selected course ID to the state
-                                                        setCourses((prevCourses) => [...prevCourses, courseId]);
-                                                    } else {
-                                                        // Remove the unselected course ID from the state
-                                                        setCourses((prevCourses) => prevCourses.filter((id) => id !== courseId));
-                                                    }
-                                                }}
-                                                className="form-check-input"
-                                            />
-                                            <label htmlFor={`course-${program.id}`} className="form-check-label">
-                                                {program.title}
-                                            </label>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                        ))}
+                    </div>
+                </div>
 
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="password2" value="Your password" />
-                                </div>
-                                <TextInput id="password2" type="password" value={password} onChange={handlePasswordChange} required shadow />
-                            </div>
-                            <Button onClick={handleSubmit} type="submit">Add Instructor</Button>
-                        </form>
-    </div>
-  )
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="password2" value="Your password" />
+                    </div>
+                    <TextInput id="password2" type="password" value={password} onChange={handlePasswordChange} required shadow />
+                </div>
+                <Button onClick={handleSubmit} type="submit">Add Instructor</Button>
+            </form>
+        </div>
+    )
 }

@@ -1,15 +1,33 @@
 import React, { createContext, useEffect, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SessionContext = createContext();
 
 const SessionProvider = ({ children }) => {
   const timeoutRef = useRef(null);
+  const navigate = useNavigate()
 
   const signOut = useCallback(() => {
-    console.log('Sign out triggered'); // Debug log
-    localStorage.clear();
-    sessionStorage.clear(); // Clear session storage, if used
-    window.location.href = '/login'; // Redirect to login page
+    const uid = localStorage.getItem('i')
+
+    switch (uid) {
+      case '1':
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate('/instructorlogin')
+        break;
+      case '2':
+        localStorage.clear();
+        sessionStorage.clear(); 
+        navigate('/adminlogin')
+        break;
+      default:
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate('/login')
+        break;
+    }
+
   }, []);
 
   // Reset timeout on user activity
@@ -29,7 +47,7 @@ const SessionProvider = ({ children }) => {
     const events = ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'];
 
     const handleUserActivity = () => {
-      console.log('User activity detected, resetting timeout'); // Debug log
+      // console.log('User activity detected, resetting timeout'); // Debug log
       resetTimeout();
     };
 

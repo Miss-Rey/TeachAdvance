@@ -35,9 +35,10 @@ const Login = () => {
         const response = await axios.post(`${endpoint}/api/adminlogin`, { email, password })
 
         if (response.status === 200) {
-          const { accessToken, userId } = response.data;
-          localStorage.setItem('at', accessToken)
-          localStorage.setItem('UID', userId)
+          const { authToken, adminId, i } = response.data;
+          localStorage.setItem('at', authToken)
+          localStorage.setItem('UID', adminId)
+          localStorage.setItem('i', i)
           enqueueSnackbar('Login Successful', { variant: 'success' })
           console.log(response.data)
 

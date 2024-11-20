@@ -28,6 +28,10 @@ const getClassDetails = require('./Routes/getCourseDetails')
 const updateClassDetails = require('./Routes/editClassDetails')
 const unenrollStudent = require('./Routes/UnenrollStudent')
 const suspendStudent = require('./Routes/suspendStudent')
+const manageInstructor = require('./Routes/ManageInstructors')
+const deleteInstructor = require('./Routes/deleteInstructor')
+const manageAdmin = require('./Routes/ManageAdmin')
+const deleteAdmin = require('./Routes/deleteAdmin')
 
 const app = express();
 
@@ -69,6 +73,10 @@ app.use('/api/getclassdetails', getClassDetails)
 app.use('/api/editclassdetails', updateClassDetails)
 app.use('/api/unenrollstudent', unenrollStudent)
 app.use('/api/suspendstudent', suspendStudent)
+app.use('/api/manageinstructors', manageInstructor)
+app.use('/api/deleteInstructor', deleteInstructor)
+app.use('/api/manageadmin', manageAdmin)
+app.use('/api/deleteadmin', deleteAdmin)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {

@@ -23,22 +23,34 @@ const MyCourses = () => {
             }
 
             try {
-                const userInfo = await fetch(`${node_endpoint}/api/profile?userId=${userId}`)
-                const info = await userInfo.json()
-                const response = await fetch(`${node_endpoint}/api/getStudentClasses?email=${info.email}`);
-                const data = await response.json();
-                setClassCode(data)
+                const userInfoResponse = await fetch(`${node_endpoint}/api/profile?userId=${userId}`);
+                const userInfo = await userInfoResponse.json();
+
+                const response = await fetch(`${node_endpoint}/api/getStudentClasses?email=${userInfo.email}`);
+
+                // Check response content type
+                const contentType = response.headers.get('content-type');
+
+                let data;
+                if (contentType && contentType.includes('application/json')) {
+                    data = await response.json();
+                } else {
+                    const textData = await response.text();
+                    throw new Error(textData);
+                }
+
+                setClassCode(data);
 
                 if (data && data.length > 0) {
-                    const classNames = data.map((classItem) => classItem.className)
+                    const classNames = data.map((classItem) => classItem.className);
                     localStorage.setItem('classname', JSON.stringify(classNames)); // Store IDs in localStorage
                     fetchMyCourses(classNames); // Fetch courses right after getting the IDs
                 } else {
                     setErrorMessage('No Classes Found');
                 }
             } catch (error) {
-                console.error('Error fetching enrolled courses:', error);
-                setErrorMessage('Failed to fetch enrolled courses');
+                console.error('Error fetching enrolled courses:', error.message);
+                setErrorMessage(error.message.includes('Not enrolled') ? 'No enrolled courses available.' : 'Failed to fetch enrolled courses');
             } finally {
                 setLoading(false);
             }
@@ -46,6 +58,7 @@ const MyCourses = () => {
 
         fetchEnrolledCourses();
     }, [userId]);
+
 
     // Function to fetch course details based on course IDs
     const fetchMyCourses = async (classNames) => {
@@ -73,7 +86,7 @@ const MyCourses = () => {
             });
 
             const data = await response.json();
-            console.log('Fetched Courses:', data); 
+            console.log('Fetched Courses:', data);
 
             if (data.data && data.data.courses) {
                 setEnrolledCourses(data.data.courses); // Update state with fetched courses

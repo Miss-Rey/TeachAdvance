@@ -5,24 +5,24 @@ import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import TopNav from '../components/Navbar';
 import axios from 'axios'
 import FooterContainer from '../components/Footer';
+import { useSnackbar } from 'notistack';
 import AdminDrawer from '../components/AdminDrawer'
-
-
-const ManageLearners = () => {
+const ManageAdmin = () => {
     const endpoint = import.meta.env.VITE_ENDPOINT
-    const [instructors, setInstructors] = useState([])
+    const [admins, setAdmin] = useState([])
     const [loggedIn, setLoggin] = useState(false)
     const navigate = useNavigate()
+    const { enqueueSnackbar} = useSnackbar()
 
     useEffect(() => {
-        fetchInstructors()
+        fetchAdmin()
     }, [])
 
-    const fetchInstructors = async () => {
-        const response = await axios.get(`${endpoint}/api/manageinstructors`)
+    const fetchAdmin = async () => {
+        const response = await axios.get(`${endpoint}/api/manageadmin`)
         const data = response.data
         console.log(data)
-        setInstructors(data)
+        setAdmin(data)
     }
 
     useEffect(() => {
@@ -30,16 +30,18 @@ const ManageLearners = () => {
         if (uid) {
             setLoggin(true)
         } else {
+            enqueueSnackbar('Session expired redirecting to login page', {variant: 'error'})
             navigate('/adminlogin')
         }
     }, [navigate])
 
 
-    const deleteInstructor = (email) => {
+    const deleteAdmin = (email) => {
         try {
-            const response = axios.delete(`${endpoint}/api/deleteinstructor?email=${email}`)
-            console.log('Instructor removed successfully')
-            fetchInstructors()
+            const response = axios.delete(`${endpoint}/api/deleteadmin?email=${email}`)
+            console.log('Admin removed successfully')
+            enqueueSnackbar('Admin removed successfully', {variant: 'success'})
+            fetchAdmin()
             window.location.reload()
         } catch (error) {
             console.error(error)
@@ -64,15 +66,15 @@ const ManageLearners = () => {
                                 <Table.HeadCell>Action</Table.HeadCell>
                             </Table.Head>
                             <Table.Body className="divide-y">
-                                {instructors.map((instrctor) => (
-                                    <Table.Row key={instrctor._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                        <Table.Cell>{instrctor.firstName}</Table.Cell>
-                                        <Table.Cell>{instrctor.lastName}</Table.Cell>
-                                        <Table.Cell>{instrctor.email}</Table.Cell>
+                                {admins.map((admin) => (
+                                    <Table.Row key={admin._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell>{admin.firstName}</Table.Cell>
+                                        <Table.Cell>{admin.lastName}</Table.Cell>
+                                        <Table.Cell>{admin.email}</Table.Cell>
                                         <Table.Cell>
                                             <Dropdown label='' placement="bottom" renderTrigger={() => <span className='flex justify-center items-center'><PiDotsThreeOutlineFill className='text-3xl text-blue-600 cursor-pointer hover:text-blue-500 duration-75 ease-in' /></span>}>
                                                 <Dropdown.Divider />
-                                                <Dropdown.Item onClick={() => deleteInstructor(instrctor.email)}>Remove</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => deleteAdmin(admin.email)}>Remove</Dropdown.Item>
                                             </Dropdown>
                                         </Table.Cell>
                                     </Table.Row>
@@ -90,4 +92,4 @@ const ManageLearners = () => {
     )
 }
 
-export default ManageLearners
+export default ManageAdmin

@@ -14,7 +14,7 @@ const Courses = () => {
     const [isEnrolled, setEnrolled] = useState(false);
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
-   
+
     const endpoint = import.meta.env.VITE_KEYSTONE
     const navigateTo = useNavigate()
     const coursePerPage = 12;
@@ -22,7 +22,7 @@ const Courses = () => {
         fetchCourses(currentPage);
     }, [currentPage]);
 
-    
+
 
     const fetchCourses = async (page) => {
         const offset = (page - 1) * coursePerPage
@@ -76,7 +76,7 @@ const Courses = () => {
             <TopNav />
             <h2 className='font-bold text-2xl px-10 py-5'>Course List</h2>
             <div className='flex flex-col md:grid lg:grid xl:grid 2xl:grid grid-cols-4 items-center justify-center gap-5 mb-10 py-3 px-10'>
-                
+
                 {courses.map((course) => (
                     <div key={course.id} className='course flex flex-col h-[450px] justify-center items-center lg:bg-slate-100 w-72 rounded-md'>
                         <div className='h-1/2 w-full'>
