@@ -53,6 +53,7 @@ const ManageAdmin = () => {
     }
     return (
         <>
+            <TopNav />
             <AdminDrawer />
             {loggedIn ? (
                 <div className='flex flex-col'>

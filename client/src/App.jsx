@@ -19,6 +19,8 @@ import ManageCourseModal from "./components/ManageCourseModal"
 import CreateClass from "./components/CreateClass"
 import AddAdmin from './pages/AddAdmin'
 import ManageAdmin from "./pages/ManageAdmin"
+import About from "./pages/About"
+import ContactUs from "./pages/ContactUs"
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="/courses/:id/notes" Component={Notes} />
         <Route path="/mycourses" Component={MyCourses} />
         <Route path="/profile" Component={profile} />
+        <Route path="/about" Component={About} />
+        <Route path="/contact" Component={ContactUs} />
         <Route path="/adminlogin" Component={AdminLogin} />
         <Route path="/admindashboard" Component={AdminDashboard} />
         <Route path="/admindashboard/addinstructor" Component={AddInstructor} />

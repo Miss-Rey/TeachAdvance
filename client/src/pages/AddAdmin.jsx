@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useSnackbar } from 'notistack';
 import TopNav from '../components/Navbar';
 import AdminDrawer from '../components/AdminDrawer'
-
+import FooterContainer from '../components/Footer';
 
 const AddAdmin = () => {
 
@@ -68,6 +68,7 @@ const AddAdmin = () => {
     if (loading) return <div>Loading...</div>
     return (
         <div>
+            <TopNav />
             <AdminDrawer />
             <h2 className='text-2xl font-semibold px-7 py-5'>Add Administrator</h2>
             <form className="flex max-w-md flex-col gap-4 mx-10">
@@ -103,6 +104,7 @@ const AddAdmin = () => {
                 </div>
                 <Button onClick={handleSubmit} type="submit">Add Administrator</Button>
             </form>
+            <FooterContainer />
         </div>
     )
 }

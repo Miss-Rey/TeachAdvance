@@ -43,7 +43,7 @@ export const ManualAddInstructor = () => {
 
     const handleCoursesChange = (e) => {
         const value = e.target.value;
-        setCourses(value.split(',').map(course => course.trim())); // Trim spaces and convert to array
+        setCourses(value.split(',').map(course => course.trim())); 
     };
 
     useEffect(() => {
@@ -151,14 +151,12 @@ export const ManualAddInstructor = () => {
                                 <input
                                     type="checkbox"
                                     id={`course-${program.id}`}
-                                    value={program.id} // Send the ID, not the title
+                                    value={program.id} 
                                     onChange={(e) => {
                                         const courseId = e.target.value;
                                         if (e.target.checked) {
-                                            // Add the selected course ID to the state
                                             setCourses((prevCourses) => [...prevCourses, courseId]);
                                         } else {
-                                            // Remove the unselected course ID from the state
                                             setCourses((prevCourses) => prevCourses.filter((id) => id !== courseId));
                                         }
                                     }}

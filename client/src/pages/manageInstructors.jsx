@@ -49,6 +49,7 @@ const ManageLearners = () => {
     }
     return (
         <>
+            <TopNav />
             <AdminDrawer />
             {loggedIn ? (
                 <div className='flex flex-col'>

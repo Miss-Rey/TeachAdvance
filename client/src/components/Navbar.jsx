@@ -38,7 +38,7 @@ const TopNav = () => {
             setError("Error fetching data");
         }
     };
-    
+
     const signOut = () => {
         localStorage.clear()
         window.location.href = '/login'
@@ -82,7 +82,11 @@ const TopNav = () => {
                         <Navbar.Toggle />
                     </div>
                 ) : (
-                    <Button><Link to={'/login'}>Login</Link></Button>
+                    <div className='flex gap-2'>
+                        <Button><Link to={'/login'}>Login</Link></Button>
+                        <Navbar.Toggle />
+                    </div>
+
                 )}
 
 
@@ -94,7 +98,7 @@ const TopNav = () => {
                 </Navbar.Link>
                 <Navbar.Link href="/courses" className='text-black'>Courses</Navbar.Link>
                 <Navbar.Link href="/about" className='text-black'>About</Navbar.Link>
-                <Navbar.Link href="/reservation" className='text-black'>Contact Us</Navbar.Link>
+                <Navbar.Link href="/contact" className='text-black'>Contact Us</Navbar.Link>
             </Navbar.Collapse>
         </Navbar>
     )

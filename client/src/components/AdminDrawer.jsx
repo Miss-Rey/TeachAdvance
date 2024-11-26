@@ -1,18 +1,6 @@
 import {React, useState} from 'react'
 import { Button, Drawer, Sidebar, TextInput } from "flowbite-react";
-import {
-    HiChartPie,
-    HiClipboard,
-    HiCollection,
-    HiInformationCircle,
-    HiLogin,
-    HiPencil,
-    HiSearch,
-    HiShoppingBag,
-    HiUsers,
-    HiMenuAlt2
-} from "react-icons/hi";
-import TopNav from './Navbar';
+import { HiMenuAlt2 } from "react-icons/hi";
 import { PiChalkboardTeacher } from "react-icons/pi";
 import { RiAdminLine } from "react-icons/ri";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
