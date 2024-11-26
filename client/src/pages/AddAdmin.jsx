@@ -68,7 +68,6 @@ const AddAdmin = () => {
     if (loading) return <div>Loading...</div>
     return (
         <div>
-            <TopNav />
             <AdminDrawer />
             <h2 className='text-2xl font-semibold px-7 py-5'>Add Administrator</h2>
             <form className="flex max-w-md flex-col gap-4 mx-10">

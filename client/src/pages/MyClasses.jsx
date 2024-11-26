@@ -28,7 +28,6 @@ const MyCourses = () => {
 
                 const response = await fetch(`${node_endpoint}/api/getStudentClasses?email=${userInfo.email}`);
 
-                // Check response content type
                 const contentType = response.headers.get('content-type');
 
                 let data;
@@ -43,8 +42,8 @@ const MyCourses = () => {
 
                 if (data && data.length > 0) {
                     const classNames = data.map((classItem) => classItem.className);
-                    localStorage.setItem('classname', JSON.stringify(classNames)); // Store IDs in localStorage
-                    fetchMyCourses(classNames); // Fetch courses right after getting the IDs
+                    localStorage.setItem('classname', JSON.stringify(classNames)); 
+                    fetchMyCourses(classNames); 
                 } else {
                     setErrorMessage('No Classes Found');
                 }

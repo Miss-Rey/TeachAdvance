@@ -7,12 +7,15 @@ import axios from 'axios'
 import FooterContainer from '../components/Footer';
 import { useSnackbar } from 'notistack';
 import AdminDrawer from '../components/AdminDrawer'
+import ReportGeneration from '../hooks/ReportGeneration';
+
 const ManageAdmin = () => {
     const endpoint = import.meta.env.VITE_ENDPOINT
     const [admins, setAdmin] = useState([])
     const [loggedIn, setLoggin] = useState(false)
     const navigate = useNavigate()
-    const { enqueueSnackbar} = useSnackbar()
+    const { enqueueSnackbar } = useSnackbar()
+    const { exportAdminData } = ReportGeneration()
 
     useEffect(() => {
         fetchAdmin()
@@ -30,7 +33,7 @@ const ManageAdmin = () => {
         if (uid) {
             setLoggin(true)
         } else {
-            enqueueSnackbar('Session expired redirecting to login page', {variant: 'error'})
+            enqueueSnackbar('Session expired redirecting to login page', { variant: 'error' })
             navigate('/adminlogin')
         }
     }, [navigate])
@@ -40,7 +43,7 @@ const ManageAdmin = () => {
         try {
             const response = axios.delete(`${endpoint}/api/deleteadmin?email=${email}`)
             console.log('Admin removed successfully')
-            enqueueSnackbar('Admin removed successfully', {variant: 'success'})
+            enqueueSnackbar('Admin removed successfully', { variant: 'success' })
             fetchAdmin()
             window.location.reload()
         } catch (error) {
@@ -56,8 +59,10 @@ const ManageAdmin = () => {
                     <div className='p-10 pb-0'>
 
                     </div>
-                    <h1 className='text-2xl font-bold px-10 py-10'>Associated Instructors</h1>
-                    <div className='py-7 px-10 pt-0 h-screen overflow-y-scroll'>
+                    <div className='flex justify-between items-center px-10'>
+                        <h1 className='text-2xl font-bold px-10 py-10'>System Administrators</h1>
+                        <Button onClick={() => exportAdminData(admins)} className=''>Export PDF</Button>
+                    </div>                    <div className='py-7 px-10 pt-0 h-screen overflow-y-scroll'>
                         <Table hoverable >
                             <Table.Head>
                                 <Table.HeadCell>Firstname</Table.HeadCell>

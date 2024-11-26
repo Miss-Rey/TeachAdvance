@@ -8,11 +8,12 @@ import ManageCourseModal from '../components/ManageCourseModal';
 import CreateClass from '../components/CreateClass';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import FooterContainer from '../components/Footer';
 
 const InstructorDashboard = () => {
     const [classes, setClasses] = useState([]);
-    const [selectedClassCode, setSelectedClassCode] = useState(''); // State for selected class code
-    const [selectedClassName, setSelectedClassName] = useState(''); // State for selected class name
+    const [selectedClassCode, setSelectedClassCode] = useState(''); 
+    const [selectedClassName, setSelectedClassName] = useState(''); 
     const [instructor, setInstructor] = useState({});
     const [loading, setLoading] = useState(false);
     const endpoint = import.meta.env.VITE_ENDPOINT;
@@ -162,6 +163,7 @@ const InstructorDashboard = () => {
             ) : (
                 <div>Please Login</div>
             )}
+            <FooterContainer />
         </>
     );
 };

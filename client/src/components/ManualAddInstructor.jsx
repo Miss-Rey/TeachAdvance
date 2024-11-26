@@ -174,7 +174,7 @@ export const ManualAddInstructor = () => {
 
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="password2" value="Your password" />
+                        <Label htmlFor="password2" value="Password" />
                     </div>
                     <TextInput id="password2" type="password" value={password} onChange={handlePasswordChange} required shadow />
                 </div>

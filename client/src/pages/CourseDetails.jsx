@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar'
 import { FcViewDetails } from "react-icons/fc";
 import { useSnackbar } from 'notistack';
 import Loading from '../components/Loading';
-
+import FooterContainer from '../components/Footer';
 
 const CourseDetails = () => {
     const { id } = useParams();
@@ -82,8 +82,6 @@ const CourseDetails = () => {
             });
 
             const data = await response.json();
-            console.log(data);
-
             // Check for errors in the response
             if (data.errors) {
                 setError(data.errors);
@@ -110,13 +108,9 @@ const CourseDetails = () => {
 
     const checkEnrollment = async (courseId) => {
         try {
-            const response = await fetch(`${node_endpoint}/api/enrolled?couseId=${courseId}&userId=${userId}`)
+            console.log({'courseid': courseId})
+            const response = await fetch(`${node_endpoint}/api/enrolled?courseId=${courseId}&userId=${userId}`)
             const data = await response.json();
-            if (!response.ok) {
-                enqueueSnackbar('Already enrolled to course', { variant: 'error' })
-
-            }
-            console.log(data)
             setEnrolled(data.isEnrolled)
         } catch (error) {
             console.error(error)
@@ -142,7 +136,7 @@ const CourseDetails = () => {
             })
 
             const result = await response.json();
-            console.log(result)
+            // console.log(result)
 
             if (response.ok && result.success) {
                 setEnrolled(true)
@@ -310,6 +304,7 @@ const CourseDetails = () => {
                 </Tabs.Item>
 
             </Tabs>
+            <FooterContainer />
         </>
     );
 }

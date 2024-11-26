@@ -13,6 +13,8 @@
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "axios": "^1.7.7",
     "flowbite-react": "^0.10.2",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "notistack": "^3.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

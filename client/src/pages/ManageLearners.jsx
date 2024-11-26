@@ -5,6 +5,7 @@ import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import TopNav from '../components/Navbar';
 import axios from 'axios'
 import { useSnackbar } from 'notistack';
+import ReportGeneration from '../hooks/ReportGeneration';
 
 const ManageLearners = () => {
     const { classCode } = useParams()
@@ -13,28 +14,34 @@ const ManageLearners = () => {
     const [learners, setLearners] = useState([])
     const [className, setClass] = useState('')
     const { enqueueSnackbar } = useSnackbar()
+    const exportToPDF = ReportGeneration()
 
     useEffect(() => {
         fetchLearners()
     }, [classCode])
 
     const fetchLearners = async () => {
-        const response = await axios.get(`${endpoint}/api/getlearners?classCode=${classCode}`)
-        const data = response.data
-        setLearners(data)
-        const className = data[0].className
-        setClass(className)
-        console.log(className)
+        try {
+            const response = await axios.get(`${endpoint}/api/getlearners?classCode=${classCode}`)
+            const data = response.data
+            setLearners(data)
+            const className = data[0].className
+            setClass(className)
+            console.log(learners)
+        } catch (error) {
+            console.error(error)
+        }
+
     }
 
     const unenrollStudent = async (email) => {
         try {
             const response = await axios.delete(`${endpoint}/api/unenrollstudent?email=${email}`)
             console.log("Student unenrolled successfully")
-            enqueueSnackbar('Student unenrolled successfully', {variant: 'success'})
+            enqueueSnackbar('Student unenrolled successfully', { variant: 'success' })
             fetchLearners()
         } catch (error) {
-            enqueueSnackbar('Failed to unenroll student', {variant: 'error'})
+            enqueueSnackbar('Failed to unenroll student', { variant: 'error' })
             console.error(error)
         }
     }
@@ -48,6 +55,7 @@ const ManageLearners = () => {
             console.error(error)
         }
     }
+
     return (
         <div className='flex flex-col'>
             <TopNav />
@@ -55,7 +63,11 @@ const ManageLearners = () => {
                 <span className='text-2xl font-md'>{classCode}: </span>
                 <span className='text-2xl font-md'>{className}</span>
             </div>
-            <h1 className='text-2xl font-bold px-10 py-10'>Enrolled Learners</h1>
+            <div className='flex justify-between items-center px-10'>
+                <span className='text-2xl font-bold px-10 py-10'>Enrolled Learners</span>
+                <Button onClick={() => exportToPDF(learners, className, classCode)} className=''>Export PDF</Button>
+            </div>
+
             <div className='py-7 px-10 pt-0'>
                 {learners.length !== 0 ? (
                     <Table hoverable >
@@ -87,7 +99,7 @@ const ManageLearners = () => {
                 ) : (
                     <div>No student enrolled to this class</div>
                 )}
-                
+
 
             </div>
 

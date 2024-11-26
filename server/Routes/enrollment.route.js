@@ -3,6 +3,7 @@ const { Enrollment } = require('../Models/enrollment')
 
 router.post('/', async (req,res) =>{
     const {userId, courseId} = req.body;
+    console.log({userId, courseId})
 
     try {
         const existingEnrollment = await Enrollment.findOne({userId, courseId})

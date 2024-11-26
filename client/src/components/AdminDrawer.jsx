@@ -33,7 +33,6 @@ const AdminDashboard = () => {
 
     return (
         <div>
-            <TopNav />
             <div className="flex h-auto items-start">
                 <Button onClick={() => setIsOpen(true)} className='bg-slate-200'>
                     <HiMenuAlt2 className='text-xl text-bold text-black' />
@@ -48,9 +47,7 @@ const AdminDashboard = () => {
                     >
                         <div className="flex h-full flex-col justify-between py-2">
                             <div>
-                                <form className="pb-3 md:hidden">
-                                    <TextInput icon={HiSearch} type="search" placeholder="Search" required size={32} />
-                                </form>
+                                
                                 <Sidebar.Items>
                                     <Sidebar.ItemGroup>
                                         {/* <Sidebar.Item href="/admindashboard" icon={HiChartPie}>
