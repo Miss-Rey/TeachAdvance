@@ -59,9 +59,9 @@ const Recommendation = () => {
             <section className='recommendation hidden lg:flex xl:flex 2xl:flex flex-col gap-3 justify-center items-center'>
                 <h2 className='font-bold text-2xl text-center'>Recommendation</h2>
                 <h2 className='text-lg'>Learning mandatory ICT courses to achieve great transformation in the workplace</h2>
-                <div className='flex justify-end w-full mr-10 text-red-600 hover:text-red-400 ease-in duration-75 cursor-pointer'><a href="">View More</a></div>
+                <div className='flex justify-end w-full mr-10 text-red-600 hover:text-red-400 ease-in duration-75 cursor-pointer'><a href="/courses">View More</a></div>
                 <div className='flex gap-5 mb-10'>
-                    {courses.map((course) => (
+                    {courses.slice(0, 4).map((course) => (
                         <div key={course.id} className='course flex flex-col h-[450px] justify-center items-center lg:bg-slate-100 w-72 rounded-md'>
                             <div className='h-1/2 w-full'>
                                 <img className='w-full h-full' src={course.thumbnail.url} alt={course.Name} />

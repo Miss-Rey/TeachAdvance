@@ -22,15 +22,16 @@ const MyCourses = () => {
       }
 
       try {
-        const response = await fetch(`${node_endpoint}/api/enrolled?userId=${userId}`);
+        const response = await fetch(`${node_endpoint}/api/mycourses?userId=${userId}`);
         const data = await response.json();
         console.log('Enrolled Courses:', data); // Debugging line
 
         if (data.courseIds && data.courseIds.length > 0) {
-          localStorage.setItem('courseIds', JSON.stringify(data.courseIds)); // Store IDs in localStorage
-          fetchMyCourses(data.courseIds); // Fetch courses right after getting the IDs
+          const extractedIds = data.courseIds.map(course => course.courseIds)
+          localStorage.setItem('courseIds', JSON.stringify(extractedIds)); // Store IDs in localStorage
+          fetchMyCourses(extractedIds); // Fetch courses right after getting the IDs
         } else {
-          setErrorMessage('No enrolled courses');
+          setErrorMessage('No courses found');
         }
       } catch (error) {
         console.error('Error fetching enrolled courses:', error);
@@ -88,15 +89,24 @@ const MyCourses = () => {
   }
 
   if (errorMessage) {
-    return <div>{errorMessage}</div>;
+    return <div>
+      <TopNav />
+      <div className='text-2xl font-bold flex item-center px-14 py-10 w-full border-b-[1px] border-slate-300'>My Courses</div>
+      <div className='flex justify-center items-center h-screen'>
+        {errorMessage}
+      </div>
+    </div>;
   }
 
   return (
     <>
       <TopNav />
+      <div className='text-2xl font-bold flex item-center px-14 py-10 w-full border-b-[1px] border-slate-300'>My Courses</div>
       <div className='flex flex-col md:grid lg:grid xl:grid 2xl:grid grid-cols-4 gap-5 m-5 md:m-10 lg:m-10 xl:m-10 2xl:m-10'>
         {enrolledCourses.length === 0 ? (
-          <div>No enrolled courses available.</div>
+          <div>
+            <TopNav />
+          </div>
         ) : (
           enrolledCourses.map((course) => (
             <div key={course.id} className='flex flex-col bg-slate-100 rounded-md'>

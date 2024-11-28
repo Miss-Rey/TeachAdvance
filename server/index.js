@@ -32,6 +32,7 @@ const manageInstructor = require('./Routes/ManageInstructors')
 const deleteInstructor = require('./Routes/deleteInstructor')
 const manageAdmin = require('./Routes/ManageAdmin')
 const deleteAdmin = require('./Routes/deleteAdmin')
+const myCourses = require('./Routes/myEnrollment')
 
 const app = express();
 
@@ -77,6 +78,7 @@ app.use('/api/manageinstructors', manageInstructor)
 app.use('/api/deleteInstructor', deleteInstructor)
 app.use('/api/manageadmin', manageAdmin)
 app.use('/api/deleteadmin', deleteAdmin)
+app.use('/api/mycourses', myCourses)
 
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {

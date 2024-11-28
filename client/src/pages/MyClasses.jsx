@@ -42,14 +42,14 @@ const MyCourses = () => {
 
                 if (data && data.length > 0) {
                     const classNames = data.map((classItem) => classItem.className);
-                    localStorage.setItem('classname', JSON.stringify(classNames)); 
-                    fetchMyCourses(classNames); 
+                    localStorage.setItem('classname', JSON.stringify(classNames));
+                    fetchMyCourses(classNames);
                 } else {
                     setErrorMessage('No Classes Found');
                 }
             } catch (error) {
                 console.error('Error fetching enrolled courses:', error.message);
-                setErrorMessage(error.message.includes('Not enrolled') ? 'No enrolled courses available.' : 'Failed to fetch enrolled courses');
+                setErrorMessage(error.message.includes('Not enrolled') ? 'No Classes Found' : 'Failed to fetch enrolled courses');
             } finally {
                 setLoading(false);
             }
@@ -104,18 +104,27 @@ const MyCourses = () => {
     }
 
     if (errorMessage) {
-        return <div>{errorMessage}</div>;
+        return <div>
+            <TopNav />
+            <div className='text-2xl font-bold flex item-center px-14 py-10 w-full border-b-[1px] border-slate-300'>My Classes</div>
+            <div className='flex justify-center items-center h-screen text-xl text-slate-400'>
+                {errorMessage}
+            </div>
+        </div>;
     }
 
     return (
         <>
             <TopNav />
             <div className=''>
+            <div className='text-2xl font-bold flex item-center px-14 py-10 w-full border-b-[1px] border-slate-300'>My Classes</div>
+
                 {enrolledCourses.length === 0 ? (
                     <div>No enrolled courses available.</div>
                 ) : (
                     enrolledCourses.map((course) => (
-                        <div key={course.id} className=' flex flex-col h-auto md:grid lg:grid xl:grid 2xl:grid grid-cols-4 gap-5 m-5 md:m-10 lg:m-10 xl:m-10 2xl:m-10'>
+                        <div key={course.id} className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-5 m-5 md:m-10 lg:m-10 xl:m-10 2xl:m-10'>
+                            
                             {classCode.map((code) => (
                                 <div className='h-auto'>
                                     <div className='h-[200px]'>
