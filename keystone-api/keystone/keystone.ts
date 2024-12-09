@@ -19,7 +19,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: ['http://localhost:5173'],
+        origin: ['https://caea-102-0-15-152.ngrok-free.app'],
         credentials: true,
       },
       port: 3000,
@@ -40,7 +40,7 @@ export default withAuth(
         // This store is used for the image field type
         type: 'image',
         // The URL that is returned in the Keystone GraphQL API
-        generateUrl: path => `http://localhost:3000/images${path}`,
+        generateUrl: path => `https://caea-102-0-15-152.ngrok-free.app/images${path}`,
         // The route that will be created in Keystone's backend to serve the images
         serverRoute: {
           path: '/images',
