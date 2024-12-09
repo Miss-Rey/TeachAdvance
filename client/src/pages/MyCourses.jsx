@@ -8,7 +8,7 @@ const MyCourses = () => {
   // const node_endpoint = import.meta.env.VITE_ENDPOINT;
   const node_endpoint = 'https://teachadvance.onrender.com'
   // const endpoint = import.meta.env.VITE_KEYSTONE;
-  const endpoint = 'https://caea-102-0-15-152.ngrok-free.app'
+  const endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql'
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const userId = localStorage.getItem('UID');

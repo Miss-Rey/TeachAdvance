@@ -19,7 +19,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: ['https://caea-102-0-15-152.ngrok-free.app'],
+        origin: ['https://teach-advance.vercel.app'],
         credentials: true,
       },
       port: 3000,
