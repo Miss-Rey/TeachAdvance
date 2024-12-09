@@ -40,7 +40,7 @@ export default withAuth(
         // This store is used for the image field type
         type: 'image',
         // The URL that is returned in the Keystone GraphQL API
-        generateUrl: path => `https://caea-102-0-15-152.ngrok-free.app/images${path}`,
+        generateUrl: path => `https://caea-102-0-15-152.ngrok-free.app/public/images${path}`,
         // The route that will be created in Keystone's backend to serve the images
         serverRoute: {
           path: '/images',
