@@ -12,6 +12,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "axios": "^1.7.7",
+    "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",

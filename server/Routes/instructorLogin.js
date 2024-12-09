@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Instructor, validate } = require('../Models/addInstructor')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {

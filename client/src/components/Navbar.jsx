@@ -96,9 +96,9 @@ const TopNav = () => {
                 <Navbar.Link href="/" className='text-black'>
                     Home
                 </Navbar.Link>
-                <Navbar.Link href="/courses" className='text-black'>Courses</Navbar.Link>
-                <Navbar.Link href="/about" className='text-black'>About</Navbar.Link>
-                <Navbar.Link href="/contact" className='text-black'>Contact Us</Navbar.Link>
+                <Navbar.Link className='text-black'><Link to={'/courses'}>Courses</Link></Navbar.Link>
+                <Navbar.Link className='text-black'><Link to={'/about'}>About Us</Link></Navbar.Link>
+                <Navbar.Link className='text-black'><Link to={'/contact'}>Contact Us</Link></Navbar.Link>
             </Navbar.Collapse>
         </Navbar>
     )

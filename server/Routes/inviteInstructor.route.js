@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Instructor, validate } = require('../Models/addInstructor')
 const { instructorInvitationMail } = require('../mailer/mail')
 const { route } = require('./addInstructor')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const generatePassword = (length = 12) => {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'

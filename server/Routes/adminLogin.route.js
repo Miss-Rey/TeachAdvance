@@ -1,6 +1,6 @@
 const { Admin } = require('../Models/admin')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const router = require('express').Router()
 
 router.post('/', async (req, res) => {
