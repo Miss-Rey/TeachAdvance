@@ -14,7 +14,8 @@ const Courses = () => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
 
-    const endpoint = import.meta.env.VITE_KEYSTONE
+    // const endpoint = import.meta.env.VITE_KEYSTONE
+    const endpoint = 'https://caea-102-0-15-152.ngrok-free.app'
     const navigateTo = useNavigate()
     const coursePerPage = 12;
     useEffect(() => {

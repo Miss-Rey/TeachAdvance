@@ -17,8 +17,10 @@ const CourseDetails = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isEnrolled, setEnrolled] = useState(false)
     const [message, setMessage] = useState('');
-    const endpoint = import.meta.env.VITE_KEYSTONE;
-    const node_endpoint = import.meta.env.VITE_ENDPOINT
+    // const endpoint = import.meta.env.VITE_KEYSTONE;
+    const endpoint = 'https://caea-102-0-15-152.ngrok-free.app'
+    // const node_endpoint = import.meta.env.VITE_ENDPOINT
+    const node_endpoint = 'https://teachadvance.onrender.com'
     const { enqueueSnackbar } = useSnackbar()
     const i = localStorage.getItem('i')
 

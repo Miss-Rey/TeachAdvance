@@ -14,7 +14,8 @@ const AddAdmin = () => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    const endpoint = import.meta.env.VITE_ENDPOINT
+    // const endpoint = import.meta.env.VITE_ENDPOINT
+    const endpoint = 'https://teachadvance.onrender.com'
     const { enqueueSnackbar } = useSnackbar()
 
     const handleFirstnameChange = (e) => {

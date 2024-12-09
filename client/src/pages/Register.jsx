@@ -41,7 +41,8 @@ const Register = () => {
     const handleIsChecked = (e) =>{
         setIsChecked(e.target.checked)
     }
-    const endpoint = import.meta.env.VITE_ENDPOINT
+    // const endpoint = import.meta.env.VITE_ENDPOINT
+    const endpoint = 'https://teachadvance.onrender.com'
     const navigateTo = useNavigate()
 
     const handleSubmit = async (e) => {

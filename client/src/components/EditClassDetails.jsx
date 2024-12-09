@@ -6,7 +6,8 @@ const ManageCourseModal = ({ editClass, setManageClassModal, classes }) => {
   const classCode = classes.map((code) => code.classCode)
   console.log({ 'classcode': classCode })
   const [Class, setClass] = useState([])
-  const endpoint = import.meta.env.VITE_ENDPOINT
+  // const endpoint = import.meta.env.VITE_ENDPOINT
+  const endpoint = 'https://teachadvance.onrender.com'
 
 
 

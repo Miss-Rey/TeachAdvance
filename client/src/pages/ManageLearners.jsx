@@ -10,7 +10,8 @@ import ReportGeneration from '../hooks/ReportGeneration';
 const ManageLearners = () => {
     const { classCode } = useParams()
     const location = useLocation()
-    const endpoint = import.meta.env.VITE_ENDPOINT
+    // const endpoint = import.meta.env.VITE_ENDPOINT
+    const endpoint = 'https://teachadvance.onrender.com'
     const [learners, setLearners] = useState([])
     const [className, setClass] = useState('')
     const { enqueueSnackbar } = useSnackbar()

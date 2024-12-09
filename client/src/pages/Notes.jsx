@@ -19,7 +19,9 @@ const Notes = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [selectedSubmodule, setSelectedSubmodule] = useState(null); // Track selected submodule
 
-    const endpount = import.meta.env.VITE_KEYSTONE;
+    // const endpount = import.meta.env.VITE_KEYSTONE;
+    const endpoint = 'https://caea-102-0-15-152.ngrok-free.app'
+
 
     const handleClose = () => setIsOpen(false);
 
@@ -52,7 +54,7 @@ const Notes = () => {
         `;
 
         try {
-            const response = await fetch(endpount, {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
