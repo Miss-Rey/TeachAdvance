@@ -10,8 +10,8 @@ import ReportGeneration from '../hooks/ReportGeneration';
 
 
 const ManageLearners = () => {
-    // const endpoint = import.meta.env.VITE_ENDPOINT
-    const endpoint = 'https://teachadvance.onrender.com'
+    const endpoint = import.meta.env.VITE_ENDPOINT
+    // const endpoint = 'https://teachadvance.onrender.com'
     const [instructors, setInstructors] = useState([])
     const [loggedIn, setLoggin] = useState(false)
     const navigate = useNavigate()

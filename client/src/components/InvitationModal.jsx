@@ -9,8 +9,8 @@ const InvitationModal = ({ openModal, setOpenModal, classCode, className }) => {
     const [email, setEmail] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    // const endpoint = import.meta.env.VITE_ENDPOINT;
-    const endpoint = 'https://teachadvance.onrender.com'
+    const endpoint = import.meta.env.VITE_ENDPOINT;
+    // const endpoint = 'https://teachadvance.onrender.com'
     const { enqueueSnackbar } = useSnackbar()
     console.log(className)
     const handleInvite = async () => {

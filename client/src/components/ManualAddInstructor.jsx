@@ -17,10 +17,10 @@ export const ManualAddInstructor = () => {
     const [courses, setCourses] = useState([])
     const [programs, setPrograms] = useState([])
     const [loading, setLoading] = useState(false)
-    // const endpoint = import.meta.env.VITE_ENDPOINT
-    const endpoint = 'https://teachadvance.onrender.com'
-    // const keystone_endpoint = import.meta.env.VITE_KEYSTONE
-    const keystone_endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql/'
+    const endpoint = import.meta.env.VITE_ENDPOINT
+    // const endpoint = 'https://teachadvance.onrender.com'
+    const keystone_endpoint = import.meta.env.VITE_KEYSTONE
+    // const keystone_endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql/'
     const { enqueueSnackbar } = useSnackbar()
 
     const handleFirstnameChange = (e) => {

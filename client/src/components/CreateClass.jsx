@@ -4,10 +4,10 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 
 const AddClassForm = ({ createClass, setCreateClass, classes, instructorId }) => {
-    // const endpoint = import.meta.env.VITE_ENDPOINT;
-    const endpoint = 'https://teachadvance.onrender.com'
-    // const keystone_endpoint = import.meta.env.VITE_KEYSTONE;
-    const keystone_endpoint = 'https://caea-102-0-15-152.ngrok-free.app'
+    const endpoint = import.meta.env.VITE_ENDPOINT;
+    // const endpoint = 'https://teachadvance.onrender.com'
+    const keystone_endpoint = import.meta.env.VITE_KEYSTONE;
+    // const keystone_endpoint = 'https://caea-102-0-15-152.ngrok-free.app'
     const { enqueueSnackbar} = useSnackbar()
     const [courses, setCourses] = useState([]);
     const [titles, setTitles] = useState([]);

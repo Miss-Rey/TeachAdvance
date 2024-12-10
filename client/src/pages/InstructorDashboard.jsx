@@ -16,8 +16,8 @@ const InstructorDashboard = () => {
     const [selectedClassName, setSelectedClassName] = useState(''); 
     const [instructor, setInstructor] = useState({});
     const [loading, setLoading] = useState(false);
-    // const endpoint = import.meta.env.VITE_ENDPOINT;
-    const endpoint = 'https://teachadvance.onrender.com'
+    const endpoint = import.meta.env.VITE_ENDPOINT;
+    // const endpoint = 'https://teachadvance.onrender.com'
     const instructorId = localStorage.getItem('UID');
     const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();

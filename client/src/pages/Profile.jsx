@@ -17,8 +17,8 @@ const Profile = () => {
         password: '',
         phone: ''
     });
-    // const endpoint = import.meta.env.VITE_ENDPOINT;
-    const endpoint = 'https://teachadvance.onrender.com'
+    const endpoint = import.meta.env.VITE_ENDPOINT;
+    // const endpoint = 'https://teachadvance.onrender.com'
     const userId = localStorage.getItem('UID');
     const { enqueueSnackbar } = useSnackbar();
 

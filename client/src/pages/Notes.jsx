@@ -19,8 +19,8 @@ const Notes = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [selectedSubmodule, setSelectedSubmodule] = useState(null); // Track selected submodule
 
-    // const endpount = import.meta.env.VITE_KEYSTONE;
-    const endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql'
+    const endpoint = import.meta.env.VITE_KEYSTONE;
+    // const endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql'
 
 
     const handleClose = () => setIsOpen(false);

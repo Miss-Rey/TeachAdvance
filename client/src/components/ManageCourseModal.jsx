@@ -10,8 +10,8 @@ const ManageCourseModal = ({ manageClass, setManageClassModal, classes }) => {
   const [classcode, setClassCode] = useState('')
   const [className, setClassName] = useState('')
   const [endDate, setEndDate] = useState('')
-  // const endpoint = import.meta.env.VITE_ENDPOINT
-  const endpoint = 'https://teachadvance.onrender.com'
+  const endpoint = import.meta.env.VITE_ENDPOINT
+  // const endpoint = 'https://teachadvance.onrender.com'
 
 
 

@@ -8,8 +8,8 @@ const TopNav = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState('')
     const [loggedIn, setLoggedIn] = useState(false)
-    // const endpoint = import.meta.env.VITE_ENDPOINT;
-    const endpoint = 'https://teachadvance.onrender.com'
+    const endpoint = import.meta.env.VITE_ENDPOINT;
+    // const endpoint = 'https://teachadvance.onrender.com'
     const userId = localStorage.getItem('UID');
     const i = localStorage.getItem('i')
 

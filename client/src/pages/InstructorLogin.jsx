@@ -10,8 +10,8 @@ const InstructorLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
   const navigateTo = useNavigate()
-  // const endpoint = import.meta.env.VITE_ENDPOINT
-  const endpoint = 'https://teachadvance.onrender.com'
+  const endpoint = import.meta.env.VITE_ENDPOINT
+  // const endpoint = 'https://teachadvance.onrender.com'
   const { enqueueSnackbar } = useSnackbar()
 
   const handleEmailChange = (e) => {

@@ -5,10 +5,10 @@ import { FaArrowRight } from 'react-icons/fa6';
 import Loading from '../components/Loading';
 
 const MyCourses = () => {
-  // const node_endpoint = import.meta.env.VITE_ENDPOINT;
-  const node_endpoint = 'https://teachadvance.onrender.com'
-  // const endpoint = import.meta.env.VITE_KEYSTONE;
-  const endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql'
+  const node_endpoint = import.meta.env.VITE_ENDPOINT;
+  // const node_endpoint = 'https://teachadvance.onrender.com'
+  const endpoint = import.meta.env.VITE_KEYSTONE;
+  // const endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql'
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const userId = localStorage.getItem('UID');
