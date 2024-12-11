@@ -7,6 +7,7 @@ const Recommendation = () => {
 
     const [courses, setCourses] = useState([]);
     const endpoint = import.meta.env.VITE_KEYSTONE
+    console.log(endpoint)
     // const endpoint = 'https://caea-102-0-15-152.ngrok-free.app/api/graphql/'
     useEffect(() => {
        fetchCourses();
@@ -37,7 +38,8 @@ const Recommendation = () => {
                     query: query,
                 })
             })
-
+            
+            console.log(response)
             const data = await response.json();
             console.log(data)
             setCourses(data.data.courses);
