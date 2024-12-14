@@ -48,3 +48,6 @@ Earn certificates upon successful course completion to showcase their profession
 Community Engagement:
 Join discussions and collaborate with peers and instructors.
 Provide feedback to help improve the platform and its offerings.
+
+# 4. Video Demo 
+[![TeachAdvance Platform](https://img.youtube.com/vi/wNk3i1qd1Gw/0.jpg)](https://www.youtube.com/watch?v=wNk3i1qd1Gw)
